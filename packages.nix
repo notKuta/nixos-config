@@ -31,25 +31,7 @@
      pkgs.tealdeer
      pkgs.xivlauncher
      inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-#     pkgs.bash
-     # options are: 'x86_64-linux', 'aarch64-linux' and 'aarch64-darwin'
-/*
-     inputs.zen-browser.packages."x86_64-linux".default # beta
-     #inputs.zen-browser.packages."x86_64-linux".beta
-     #inputs.zen-browser.packages."x86_64-linux".twilight
-     # IMPORTANT: this package relies on the twilight release artifacts from the
-     # official zen repo and those artifacts are always replaced, causing hash mismatch
-     #inputs.zen-browser.packages."x86_64-linux".twilight-official
-
-     # you can even override the package policies
-     inputs.zen-browser.packages."x86_64-linux".default.override {
-       extraPolicies = {
-         DisableAppUpdate = true;
-         DisableTelemetry = true;
-      # more and more
-       };
-     }
-*/
+#    pkgs.bash
   #  wget
   ];
 }
