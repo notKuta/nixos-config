@@ -7,7 +7,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      ./hardware-configuration-desktop.nix
       ./users.nix
       ./networking.nix
       ./audio.nix
@@ -15,6 +15,8 @@
       ./display_server.nix
       ./nvidia.nix
     ];
+  # Set hostname
+  networking.hostName = "poseidon"; # Define your hostname.
 
   # Enables flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
