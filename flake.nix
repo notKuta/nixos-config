@@ -29,5 +29,23 @@
         } 
       ];
     };
+/*
+    nixosConfigurations.neptune = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = { inherit inputs; };
+      modules = [ ./laptop-configuration.nix 
+      home-manager.nixosModules.default
+      {
+        home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          backupFileExtension = "bak";
+          extraSpecialArgs = { inherit inputs; };
+          users.kuta = ./home.nix; # replace <kuta> with new username if changed
+        };
+      } 
+      ];
+    };
+*/
   };
 }
