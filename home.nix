@@ -41,8 +41,9 @@
       enable = true;
       defaultEditor = true;
       initLua = let
-      	w0ke = lib.mkOrder 500 "vim.opt.shiftwidth = 4\nvim.opt.expandtab = true\nvim.opt.tabstop = 4";
-	in lib.mkMerge [ w0ke ];
+      	tabs = lib.mkOrder 500 "vim.opt.shiftwidth = 4\nvim.opt.expandtab = true\nvim.opt.tabstop = 4";
+        rel_lines = lib.mkOrder 500 "vim.opt.relativenumber = true";
+	in lib.mkMerge [ tabs rel_lines ];
     };
   };
 }
