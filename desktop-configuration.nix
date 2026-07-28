@@ -7,7 +7,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration-desktop.nix
+      ./desktop-hardware-configuration.nix
       ./common.nix
     ];
   # Set hostname

@@ -12,11 +12,11 @@
     };
   };
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
-    # replace 'nixos' with your hostname here
+    # replace '.<name>' with your hostname here
     nixosConfigurations.poseidon = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
-      modules = [ ./desktop.nix 
+      modules = [ ./desktop-configuration.nix 
         home-manager.nixosModules.default
         {
           home-manager = {
