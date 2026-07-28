@@ -78,6 +78,12 @@
   #### SYSTEM-WIDE PACKAGES ####
   ##############################
 
+  # Use latest kernel.
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
   programs = { 
       # Install firefox.
     firefox.enable = true;
@@ -95,9 +101,6 @@
     };
   };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = [
@@ -113,6 +116,73 @@
   #  wget
   ];
 
+  ##############################
+  ######### BOOTLOADER #########
+  ##############################
 
+  # Bootloader.
+  boot.loader.limine.enable = true;
+  boot.loader.limine.efiSupport = pkgs.stdenv.hostPlatform.isEfi;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  ##############################
+  ########### FLAKES ###########
+  ##############################
+
+  # Enables flakes
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  ###########################################
+  ########### TIMEZONES / LOCALE  ###########
+  ###########################################
+
+  # Set your time zone.
+  time.timeZone = "America/New_York";
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "en_US.UTF-8";
+    LC_IDENTIFICATION = "en_US.UTF-8";
+    LC_MEASUREMENT = "en_US.UTF-8";
+    LC_MONETARY = "en_US.UTF-8";
+    LC_NAME = "en_US.UTF-8";
+    LC_NUMERIC = "en_US.UTF-8";
+    LC_PAPER = "en_US.UTF-8";
+    LC_TELEPHONE = "en_US.UTF-8";
+    LC_TIME = "en_US.UTF-8";
+  };
+
+  ###########################################
+  ################ PRINTING #################
+  ###########################################
+
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+
+  # Enable touchpad support (enabled default in most desktopManager).
+  # services.xserver.libinput.enable = true;
+
+  ###########################################
+  ############# SUID WRAPPERS ###############
+  ###########################################
+
+  # Some programs need SUID wrappers, can be configured further or are
+  # started in user sessions.
+  # programs.mtr.enable = true;
+  # programs.gnupg.agent = {
+  #   enable = true;
+  #   enableSSHSupport = true;
+  # };
+
+  ###########################################
+  ########### DAEMON / SERVICES #############
+  ###########################################
+
+  # List services that you want to enable:
+
+  # Enable the OpenSSH daemon.
+  # services.openssh.enable = true;
 
 }
