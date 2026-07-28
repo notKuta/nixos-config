@@ -34,5 +34,7 @@
         init.defaultBranch = "main";
       }; 
     };
+
+    discord.enable = true;
   };
 }
