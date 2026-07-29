@@ -86,7 +86,6 @@
       };
     };
 
-
     neovim = {
       enable = true;
       defaultEditor = true;
@@ -94,10 +93,9 @@
       [
         nvim-lspconfig
         markdown-preview-nvim
-#       nvim-lint
         render-markdown-nvim
-#       mini-icons
         mini-pairs
+        
         bufferline-nvim
         lualine-nvim
 #       trouble-nvim
@@ -106,22 +104,18 @@
 
         oxocarbon-nvim
         nvim-web-devicons
-/*
-        telescope-nvim
-        plenary-nvim
-        telescope-fzy-native-nvim
-*/
-      ];
+     ];
       initLua = let
       	tabs = lib.mkOrder 500 "vim.opt.shiftwidth = 2\nvim.opt.expandtab = true\nvim.opt.tabstop = 2";
         rel_lines = lib.mkOrder 500 "vim.opt.relativenumber = true";
-        lsp_nix = lib.mkOrder 500 "vim.lsp.enable('nixd')";
-        lsp_md = lib.mkOrder 500 "vim.lsp.enable('marksman')";
-        #mini_icons = lib.mkOrder 500 "require('mini.icons').setup()";
+
+        lsp = lib.mkOrder 500 "vim.lsp.enable('nixd')\nvim.lsp.enable('marksman')";
         mini_pairs = lib.mkOrder 500 "require ('mini.pairs').setup()";
+
         bufferline = lib.mkOrder 500 "vim.opt.termguicolors = true\nrequire('bufferline').setup{}";
         lualine = lib.mkOrder 500 "require('lualine').setup()";
         oxocarbon = lib.mkOrder 500 "vim.opt.background = 'dark'\nvim.cmd.colorscheme 'oxocarbon'";
+
         nvim_web_devicons = "require'nvim-web-devicons'.setup {
           -- your personal icons can go here (to override)
           -- you can specify color or cterm_color instead of specifying both of them
@@ -182,53 +176,9 @@
             },
           };
         }";
-        /*
-        telescope = "require('telescope').setup{
-          defaults = {
-          -- Default configuration for telescope goes here:
-          -- config_key = value,
-            mappings = {
-              i = {
-            -- map actions.which_key to <C-h> (default: <C-/>)
-            -- actions.which_key shows the mappings for your picker,
-            -- e.g. git_{create, delete, ...}_branch for the git_branches picker
-              ['<C-h>'] = 'which_key'
-              }
-            }
-          },
-          pickers = {
-          -- Default configuration for builtin pickers goes here:
-          -- picker_name = {
-          --   picker_config_key = value,
-          --   ...
-          -- }
-          -- Now the picker_config_key will be applied every time you call this
-          -- builtin picker
-          },
-          extensions = {
-          -- Your extension configuration goes here:
-          -- extension_name = {
-          --   extension_config_key = value,
-          -- }
-          -- please take a look at the readme of the extension you want to configure
-          }
-        }";
-
-        fzy_native = "require('telescope').load_extension('fzy_native')";
-
-        plenary = "local async = require 'plenary.async'";
-        */
-
-#      linters = lib.mkOrder 500 "require('lint').linters_by_ft = { markdown = {'markdownlint-cli2'}, nix = {'nix'}, }";
-      in lib.mkMerge [ tabs rel_lines lsp_nix lsp_md bufferline mini_pairs lualine oxocarbon nvim_web_devicons ];
+      in lib.mkMerge [ tabs rel_lines bufferline mini_pairs lsp lualine oxocarbon nvim_web_devicons ];
 
 #     extraPython3Packages = pyPkgs: with pyPkgs; [ pylatexenc ];
-
-    };
-
-    helix = {
-      enable = true;
-      #defaultEditor = true;
 
     };
   };
