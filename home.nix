@@ -91,20 +91,39 @@
       defaultEditor = true;
       plugins = with pkgs.vimPlugins; 
       [
+        # Helps with easy lsp configs for enabled &
+        # download langs
         nvim-lspconfig
+        # Enables markdown preview in-browser
         markdown-preview-nvim
+        # Enables markdown in-terminal previews
         render-markdown-nvim
-        mini-pairs
-        
-        bufferline-nvim
-        lualine-nvim
-#       trouble-nvim
 
-#       which-key-nvim
+        # Immediately creates corresponding 
+        # character for parenthesis, quotes, etc.
+        mini-pairs
+        # Creates the "tabs" look at the top of
+        # nvim window
+        bufferline-nvim
+        # Creates the bottom statusline
+        lualine-nvim
+
+        # Makes diagnostics 'prettier'
+        # trouble-nvim
+
+        # Pop-up to illustrate keybinds
+        # available 
+        # This is the plugin which should
+        # Be focused on and customized next
+        which-key-nvim
+        # UI Component Library
         nui-nvim
+        # 'Prettier' cmdline 
         noice-nvim
 
+        # Theme
         oxocarbon-nvim
+        # Icons
         nvim-web-devicons
      ];
       initLua = let
