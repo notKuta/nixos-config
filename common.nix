@@ -95,7 +95,7 @@
       defaultEditor = true;
     }; 
     bash = { 
-      shellAliases = { ll = "ls -al"; };
+      shellAliases = { ll = "ls -al"; icat = "kitten icat"; };
       enable = true;
       interactiveShellInit = "fastfetch";
     };
