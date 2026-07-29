@@ -19,7 +19,7 @@
   hardware.nvidia.open = true;
   hardware.nvidia.modesetting.enable = true;
   # Comment out to specify what package for nvidia drivers
-  # hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
   hardware.nvidia.powerManagement.enable = true;
 
   # This value determines the NixOS release from which the default
