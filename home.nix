@@ -118,7 +118,6 @@
         lualine = lib.mkOrder 500 "require('lualine').setup()";
         oxocarbon = lib.mkOrder 500 "vim.opt.background = 'dark'\nvim.cmd.colorscheme 'oxocarbon'";
 
-        nui = lib.mkOrder 500 "require('nui').setup()";
         noice = lib.mkOrder 500 "require('noice').setup({
           lsp = {
           -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -198,7 +197,7 @@
             },
           };
         }";
-      in lib.mkMerge [ tabs rel_lines bufferline mini_pairs lsp lualine oxocarbon nvim_web_devicons nui noice];
+      in lib.mkMerge [ tabs rel_lines bufferline mini_pairs lsp lualine oxocarbon nvim_web_devicons noice];
 
 #     extraPython3Packages = pyPkgs: with pyPkgs; [ pylatexenc ];
 
