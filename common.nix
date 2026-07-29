@@ -112,6 +112,9 @@
      pkgs.tealdeer
      pkgs.xivlauncher
      inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+     pkgs.nixd
+     pkgs.marksman
+  #  pkgs.vimPlugins.markdown-preview-nvim
   #  pkgs.bash
   #  wget
   ];
