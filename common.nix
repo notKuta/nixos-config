@@ -99,16 +99,15 @@
       enable = true;
       interactiveShellInit = "fastfetch";
     };
+    coolercontrol.enable = true;
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = [
-     #pkgs.vim  Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
      pkgs.fastfetch
      pkgs.btop-cuda
      pkgs.mangohud
-  #  pkgs.git (currently installed through home-manager)
      pkgs.tealdeer
      pkgs.xivlauncher
      inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
@@ -116,7 +115,8 @@
      pkgs.marksman
      pkgs.fira-code
      pkgs.fira-code-symbols
-  #  pkgs.vimPlugins.markdown-preview-nvim
+     pkgs.dust
+     pkgs.openrgb
   #  pkgs.bash
   #  wget
   ];
