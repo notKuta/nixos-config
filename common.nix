@@ -114,6 +114,8 @@
      inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
      pkgs.nixd
      pkgs.marksman
+     pkgs.fira-code
+     pkgs.fira-code-symbols
   #  pkgs.vimPlugins.markdown-preview-nvim
   #  pkgs.bash
   #  wget
@@ -156,6 +158,11 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
+
+  fonts.packages = with pkgs; [
+    fira-code
+    fira-code-symbols
+  ];
 
   ###########################################
   ################ PRINTING #################
