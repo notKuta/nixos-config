@@ -21,8 +21,8 @@ sudo nixos-rebuild switch
 >[!caution]
 > Make sure to replace the `desktop-hardware-configuration.nix` file with your
 > own---usually called `hardware-configuration.nix`. This is usually
-> where NixOS stores critical information such as what filesystems should be mounted
-> and swap declaration. 
+> where critical information, such as the file systems that need to be mounted, is stored
+> and is normally generated during installation. 
 
 ## "Install Guide"
 
@@ -37,5 +37,6 @@ deploy a new system with:
 
 - Swapfile
 
-This does **NOT** cover all edge-cases nor is it exhaustive. In such cases
-the proper documentation should be referred to---see [here](https://nixos.org/manual/nixos/stable/), for instance.
+This does **NOT** cover all edge-cases nor is it exhaustive. In such cases,
+the proper documentation should be referred to---see [here](https://nixos.org/manual/nixos/stable/)
+or the [NixOS wiki](https://wiki.nixos.org/wiki/NixOS_Wiki).
