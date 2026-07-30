@@ -32,6 +32,7 @@
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
+      extraLadspaPackages = [ pkgs.rnnoise-plugin ];
       # If you want to use JACK applications, uncomment this
       #jack.enable = true;
 
@@ -85,29 +86,35 @@
   nixpkgs.config.allowUnfree = true;
 
   programs = { 
-      # Install firefox.
+
     firefox.enable = true;
-      # Install steam.
+
     steam.enable = true;
-      # Set vim as default editor
+
     vim = {
       enable = true;
       defaultEditor = true;
     }; 
+
     bash = { 
       shellAliases = { ll = "ls -al"; icat = "kitten icat"; };
       enable = true;
       interactiveShellInit = "fastfetch";
     };
+
     coolercontrol.enable = true;
+
+    gamemode.enable = true;
+
   };
+  
+  services.hardware.openrgb.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = [
      pkgs.fastfetch
      pkgs.btop-cuda
-     pkgs.mangohud
      pkgs.tealdeer
      pkgs.xivlauncher
      inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
@@ -116,7 +123,9 @@
      pkgs.fira-code
      pkgs.fira-code-symbols
      pkgs.dust
-     pkgs.openrgb
+     pkgs.protonplus
+     pkgs.ungoogled-chromium
+     pkgs.faugus-launcher
   #  pkgs.bash
   #  wget
   ];
