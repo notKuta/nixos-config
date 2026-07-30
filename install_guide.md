@@ -31,8 +31,8 @@ and `fdisk` to create said table.
 
 1. Launch fdisk:
 
-```bash
-‎ # fdisk /dev/nvme0n1
+```txt
+# fdisk /dev/nvme0n1
 ```
 
 2. Create a `GPT` table by typing `g`.
@@ -75,7 +75,7 @@ If all looks good, type `w` and the partition table will be written.
 
 Here, we will setup the luks encryption layer using `/dev/nvme0n1` as our device:
 
-```bash
+```txt
 # cryptsetup luksFormat /dev/nvme0n1
 
 # cryptsetup luksOpen /dev/nvme0n1 cryptroot
@@ -84,19 +84,19 @@ Here, we will setup the luks encryption layer using `/dev/nvme0n1` as our device
 Now format the drive to whatever filesystem you wish; here we will use `ext4` and
 label the partition as `nixos`:
 
-```bash
+```txt
 # mkfs.ext4 -L nixos /dev/mapper/cryptroot
 ```
 
 Don't forget about the `boot` partition---which will be labeled as `boot`:
 
-```bash
+```txt
 # mkfs.fat -F 32 -n boot /dev/nvme0n1p1
 ```
 
 Mount the partitions:
 
-```bash
+```txt
 # mount /dev/mapper/cryptroot /mnt
 
 $ mkdir -p /mnt/boot
@@ -110,7 +110,7 @@ over the steps to retrieve it.
 
 First, run the following:
 
-```bash
+```txt
 # nix-shell -p git --run "git clone https://github.com/notKuta/nixos-config.git"
 ```
 
