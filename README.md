@@ -20,7 +20,7 @@ sudo nixos-rebuild switch
 
 >[!caution]
 > Make sure to replace the `desktop-hardware-configuration.nix` file with your
-> your own---usually called `hardware-configuration.nix`. This is usually
+> own---usually called `hardware-configuration.nix`. This is usually
 > where NixOS stores critical information such as what filesystems should be mounted
 > and swap declaration. 
 
