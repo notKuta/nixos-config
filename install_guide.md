@@ -150,6 +150,9 @@ $ cp * /mnt/etc/nixos
 > [!caution]
 > Beware of accidentally removing / overwriting your `hardware-configuration.nix` file.
 
+Additionally, make sure your imported modules in `flake.nix` and `desktop-configuration.nix`
+are correctly configured and labeled.
+
 Now, if you use a flake-based installation, you can pass the additional flags
 when installing the system:
 
