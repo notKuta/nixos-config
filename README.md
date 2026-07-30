@@ -20,8 +20,16 @@ sudo nixos-rebuild switch
 
 ## "Install Guide"
 
-To see a "common sense" manual installation guide click [here.]()
-This is a quick write-up I wrote describing the steps I take to
-deploy a new system with LUKS-based encryption, TPM auto-unlocking, and a swapfile.
-This does NOT cover all edge-cases and in such cases the proper documentation
-should be referred to---see [here](), for instance.
+To see a "common sense" manual installation guide click [here.](https://github.com/notKuta/nixos-config/blob/experimental/install_guide.md)
+This is a quick write-up I wrote as a reference since I was tired of scouring
+through random webpages just to deploy a new system. These steps describe how to
+deploy a new system with:
+
+- LUKS-based encryption
+
+- TPM auto-unlocking
+
+- Swapfile.
+
+This does **NOT** cover all edge-cases nor is it exhaustive. In such cases
+the proper documentation should be referred to---see [here](https://nixos.org/manual/nixos/stable/), for instance.
