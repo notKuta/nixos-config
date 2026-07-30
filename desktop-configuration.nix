@@ -8,6 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./desktop-hardware-configuration.nix
+      # Includes the common, shared packages between systems
       ./common.nix
     ];
   # Set hostname
