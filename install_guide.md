@@ -32,7 +32,7 @@ and `fdisk` to create said table.
 1. Launch fdisk:
 
 ```bash
-'#' fdisk /dev/nvme0n1
+‎ # fdisk /dev/nvme0n1
 ```
 
 2. Create a `GPT` table by typing `g`.
