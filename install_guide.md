@@ -64,12 +64,12 @@ the changes which `fdisk` will write in just a moment.
 
 If all looks good, type `w` and the partition table will be written.
 
-> [!note]
+> [!tip]
 > Use:
 > ```console
 > sudo -i
 > ````
-> in order to become the superuser.
+> to become the superuser.
 
 ## Encryption
 
@@ -103,17 +103,87 @@ $ mkdir -p /mnt/boot
 # mount -o umask=077 /dev/nvme0n1p1 /mnt/boot
 ```
 
-## Git
+## Installation
 
-If you store your NixOS configuration files on GitHub (or any remote git repo), we will go
-over the steps to retrieve it.
+Here, we will finish the installation.
 
-First, run the following:
+To continue, we have to generate our `configuration.nix` file. To do so:
+
+```console
+# nixos-generate-config --root /mnt
+```
+
+> [!note]
+> Even if you will pull your config files from a remote git repo,
+> this step generates the `hardware-configuration.nix` file which
+> will have all our previous formatting and encryption shenangians
+> stored there for NixOS to use.
+
+Before you continue, edit the `hardware-configuration.nix` file to add
+a swap file:
+
+```bash
+{
+  swapDevices = [{
+    device = "/swapfile";
+    size = 32 * 1024; # 32 GiB
+  }];
+}
+```
+
+If you store your NixOS configuration files on GitHub (or any remote git repo), you
+may do the following.
+
+First, run the following to clone a repo:
 
 ```console
 # nix-shell -p git --run "git clone https://github.com/notKuta/nixos-config.git"
 ```
 
+where you can replace the github link with a repo of your choosing. Then, `cd` into
+the cloned repo and copy your config files into `/mnt/etc/nixos`:
+
+```console
+$ cp * /mnt/etc/nixos
+```
+
+> [!caution]
+> Beware of accidentally removing / overwriting your `hardware-configuration.nix` file.
+
+Now, if you use a flake-based installation, you can pass the additional flags
+when installing the system:
+
+```console
+# nixos-install --flake '/mnt/etc/nixos.#poseidon'
+````
+
+where you may replace `poseidon` with the hostname specificed in your flake. For a generic
+installation, you simply do:
+
+```console
+# nixos-install
+```
+
+After it's done installing, it will prompt you for a root password. Furthermore, if you have
+a user account declared in your configuration, make sure to set a password before rebooting
+e.g. for the `kuta` user:
+
+```console
+# nixos-enter --root /mnt -c `passwd kuta`
+```
+
+If alls well, then reboot the system:
+
+```console
+# reboot
+```
+
+## Post-Install 
+
+Here, is where the process is described for setting up TPM auto-unlocking our encrypted drive.
+Steps for setting up secure boot will also be shown as well.
+
+Will continue some other time. Too much writing today.
 
 ## Sources
 
