@@ -152,6 +152,14 @@
   ''
   ];
 */  
+  security.tpm2 = {
+    enable = true;
+    abrmd.enable = true;
+    pkcs11.enable = true;
+
+    tctiEnvironment.enable = true;
+    tctiEnvironment.interface = "tabrmd";
+  };
  
   ##############################
   #### SYSTEM-WIDE PACKAGES ####
@@ -194,24 +202,24 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = [
-     pkgs.fastfetch
-     pkgs.btop-cuda
-     pkgs.tealdeer
-     pkgs.xivlauncher
-     pkgs.nixd
-     pkgs.marksman
-     pkgs.fira-code
-     pkgs.fira-code-symbols
-     pkgs.dust
-     pkgs.protonplus
-     pkgs.ungoogled-chromium
-     pkgs.faugus-launcher
-     pkgs.sunshine
-     pkgs.haruna
-     pkgs.kdePackages.filelight
-     pkgs.webcord
-     pkgs.firefoxpwa
+  environment.systemPackages = with pkgs; [
+     fastfetch
+     btop-cuda
+     tealdeer
+     xivlauncher
+     nixd
+     marksman
+     fira-code
+     fira-code-symbols
+     dust
+     protonplus
+     ungoogled-chromium
+     faugus-launcher
+     sunshine
+     haruna
+     kdePackages.filelight
+     webcord
+     firefoxpwa
   #  pkgs.bash
   #  wget
   ];

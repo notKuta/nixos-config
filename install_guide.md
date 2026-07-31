@@ -186,7 +186,33 @@ If alls well, then reboot the system:
 Here, is where the process is described for setting up TPM auto-unlocking our encrypted drive.
 Steps for setting up secure boot will also be shown as well.
 
-Will continue some other time. Too much writing today.
+To setup TPM2, write the following in your `configuration.nix` or equivalent:
+
+```console
+security.tpm2 = {
+    enable = true;
+    abrmd.enable = true;
+    pkcs11.enable = true;
+
+    tctiEnvironment.enable = true;
+    tctiEnvironment.interface = "tabrmd";
+}
+```
+
+Then, do the following where we use `/dev/nvme0n1p2` as our `device` (use `lsblk` to see
+on what device your luks layer is stored on):
+
+```console
+# systemd-cryptenroll /dev/nvme0n1p2 --recovery-key
+# systemd-cryptenroll /dev/nvme0n1p2 --wipe-slot=empty --tpm2-device=auto --tpm2-pcrs=4+9+12:sha256=0000000000000000000000000000000000000000000000000000000000000000
+```
+
+If using secure boot, you can use the PCR policies of `4+7+8+9` as a sane default.
+
+> [!caution]
+> Make sure to store your recovery key in a secure location. This is what you will
+> use if your TPM device cannot authenticate properly e.g. if one of the PCR policies
+> gets triggered.
 
 ## Sources
 
