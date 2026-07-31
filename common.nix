@@ -14,6 +14,12 @@
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
+  environment.plasma6.excludePackages = with pkgs.kdePackages; [
+    plasma-browser-integration
+    konsole
+    elisa
+  ];
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
@@ -32,7 +38,48 @@
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
-      extraLadspaPackages = [ pkgs.rnnoise-plugin ];
+      extraLadspaPackages = [ pkgs.rnnoise-plugin pkgs.ladspaPlugins ];
+      /*
+      extraConfig.pipewire = {"60-microphone-denoiser" = {
+        "context.modules" = [
+          { name = "libpipewire-module-rtkit"; args = { }; flags = [ "ifexists" "nofail" ]; }
+          {
+            name = "libpipewire-module-filter-chain";
+            args = {
+              "node.description" = "Microphone (noise suppressed)";
+              "media.name" = "Microphone (noise suppressed)";
+              "filter.graph" = {
+                nodes = [
+                  {
+                    type = "ladspa";
+                    name = "rnnoise";
+                    plugin = "librnnoise_ladspa";
+                    label = "noise_suppressor_mono";
+                    control = {
+                      "VAD Threshold (%)" = 50.0;
+                      "VAD Grace Period (ms)" = 200;
+                      "Retroactive VAD Grace (ms)" = 0;
+                    };
+                  }
+                ];
+              };
+              "audio.rate" = 48000;
+              "audio.position" = [ "FL" ];
+
+              "capture.props" = {
+                "node.passive" = true;
+                "node.name" = "input.microphone_rnnoise";
+              };
+
+              "playback.props" = {
+                "media.class" = "Audio/Source";
+                "node.name" = "output.microphone_rnnoise";
+              };
+            };
+          }
+        ];
+      };
+    };*/
       # If you want to use JACK applications, uncomment this
       #jack.enable = true;
 
@@ -49,10 +96,11 @@
     isNormalUser = true;
     description = "kuta";
     extraGroups = [ "networkmanager" "wheel" ];
+    /*
     packages = with pkgs; [
       kdePackages.kate
     #  thunderbird
-    ];
+    ];*/
   };
 
   ########################
@@ -73,7 +121,37 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-  
+  # DNS Settings for systemd-resolve
+  services.resolved = {
+    enable = true;
+    settings.Resolve = {
+        DNSOverTLS = "true";
+        DNSSEC = "true";
+        Domains = [ "~." ];
+        DNS =
+        ''
+        DNS=45.90.28.0#cd5dc8.dns.nextdns.io
+        DNS=2a07:a8c0::#cd5dc8.dns.nextdns.io
+        DNS=45.90.30.0#cd5dc8.dns.nextdns.io
+        DNS=2a07:a8c1::#cd5dc8.dns.nextdns.io
+        '';
+        FallbackDNS = [
+          "1.1.1.1"
+          "1.0.0.1"
+        ];
+    };
+  };
+/*
+  # Nameservers 
+  networking.nameservers = [
+  ''
+  45.90.28.0#cd5dc8.dns.nextdns.io
+  2a07:a8c0::#cd5dc8.dns.nextdns.io
+  45.90.30.0#cd5dc8.dns.nextdns.io
+  2a07:a8c1::#cd5dc8.dns.nextdns.io
+  ''
+  ];
+*/  
  
   ##############################
   #### SYSTEM-WIDE PACKAGES ####
@@ -87,7 +165,11 @@
 
   programs = { 
 
-    firefox.enable = true;
+    firefox = {
+      enable = true;
+      package = pkgs.firefox;
+      nativeMessagingHosts.packages = [ pkgs.firefoxpwa ];
+    };    
 
     steam.enable = true;
 
@@ -117,7 +199,6 @@
      pkgs.btop-cuda
      pkgs.tealdeer
      pkgs.xivlauncher
-     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
      pkgs.nixd
      pkgs.marksman
      pkgs.fira-code
@@ -126,6 +207,11 @@
      pkgs.protonplus
      pkgs.ungoogled-chromium
      pkgs.faugus-launcher
+     pkgs.sunshine
+     pkgs.haruna
+     pkgs.kdePackages.filelight
+     pkgs.webcord
+     pkgs.firefoxpwa
   #  pkgs.bash
   #  wget
   ];

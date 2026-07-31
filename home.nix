@@ -11,28 +11,34 @@
   # changes in each release.
   home.stateVersion = "26.11";
   
+  imports = [
+    # or inputs.zen-browser.homeModules.beta
+    inputs.zen-browser.homeModules.twilight
+    # or inputs.zen-browser.homeModules.twilight-official
+  ];
+
   services = {
     pipewire = {
       enable = true;
       configPackages = [
         (pkgs.writeTextDir "share/pipewire/pipewire.conf.d/99-input-denoising.conf" ''
-          context.modules = [
-            {
-              name = libpipewire-module-filter-chain
-              args = {
-                node.description =  "Microphone (noise suppressed)"
-                media.name =  "Microphone (noise suppressed)"
-                filter.graph = {
-                  nodes = [
+        context.modules = [
+        {
+            name = libpipewire-module-filter-chain
+            args = {
+              node.description =  "Microphone (noise suppressed)"
+              media.name =  "Microphone (noise suppressed)"
+              filter.graph = {
+                nodes = [
                     {
-                      type = ladspa
-                      name = rnnoise
-                      plugin = librnnoise_ladspa
-                      label = noise_suppressor_mono
-                      control = {
-                        "VAD Threshold (%)" = 50.0
-                        "VAD Grace Period (ms)" = 200
-                        "Retroactive VAD Grace (ms)" = 0
+                       type = ladspa
+                       name = rnnoise
+                       plugin = librnnoise_ladspa
+                       label = noise_suppressor_mono
+                       control = {
+                         "VAD Threshold (%)" = 85.0
+                         "VAD Grace Period (ms)" = 200
+                         "Retroactive VAD Grace (ms)" = 0
                       }
                     }
                   ]
@@ -49,7 +55,7 @@
                 }
             }
           }
-      ]
+          ]
       '')
       ];  
 
@@ -57,6 +63,11 @@
   };
 
   programs = {
+
+    zen-browser = {
+      enable = true;
+      setAsDefaultBrowser = true;
+    };
 
    git = {
       enable = true;
@@ -69,10 +80,15 @@
       }; 
     };
 
-    discord.enable = true;
+#    discord.enable = true;
 
     mangohud = {
       enable = true;
+    };
+
+    thunderbird = {
+      enable = true;
+      # Much more options available
     };
 
     kitty = {
