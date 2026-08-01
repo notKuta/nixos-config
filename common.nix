@@ -137,7 +137,7 @@
     steam = {
       enable = true;
       # Fixes Xorg cursor issues
-      extraPackages = with pkgs; [ kdePackages.breeze ];
+      extraPackages = with pkgs; [ kdePackages.breeze mangohud];
 
     };
 
@@ -155,6 +155,9 @@
     coolercontrol.enable = true;
 
     gamemode.enable = true;
+
+    # Oepns the TCP & UDP ports 1714 to 1764 to make it work
+    kdeconnect.enable = true;
 
   };
   

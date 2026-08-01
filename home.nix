@@ -10,7 +10,11 @@
   # the Home Manager release notes for a list of state version
   # changes in each release.
   home.stateVersion = "26.11";
-  
+
+  xdg.configFile = {
+    "MangoHud/MangoHud.conf".source = config.lib.file.mkOutOfStoreSymlink "/home/kuta/nixos-config/configs/MangoHud.conf";
+  };
+
   imports = [
     # or inputs.zen-browser.homeModules.beta
     inputs.zen-browser.homeModules.twilight
@@ -19,7 +23,7 @@
 
   # Sets user environmental variables thru Systemd i.e. 
   # on other distros this would be thru ~/.config/environment.d
-  systemd.user.sessionVariables = { __GL_SHADER_DISK_CACHE_SIZE = "12000000000"; };
+  systemd.user.sessionVariables = { __GL_SHADER_DISK_CACHE_SIZE = 12000000000; MANGOHUD = 1; };
 
   services = {
     pipewire = {
@@ -102,10 +106,78 @@
         init.defaultBranch = "main";
       }; 
     };
+# Disabled mangohud settings submodule since 
+# it does not adhere to the ordering
+# given to it; might mess with the it locally to fix
 
     mangohud = {
       enable = true;
-      # Much more options available (make sure to do!)
+/*
+      settings = {
+        legacy_layout = 0;
+        
+        # General
+        horizontal = true;
+        background_alpha = 0.6;
+        round_corners = 0;
+        background_color = "000000";
+        font_size = 24;
+        text_color = "FFFFFF";
+        position = "top-left";
+        toggle_hud="Shift_R+F12";
+        table_columns = 3;
+
+        # Frame
+        fps = true;
+        frame_timing = true;
+        frametime_color="00FF00";
+        fps_limit_method = "late";
+        toggle_fps_limit = "Shift_L+F1";
+        fps_limit = 120;
+        fps_color_change = true;
+        fps_color = "B22222,FDFD09,39F900";
+        fps_value = "90,120";
+        # Turns vsync off for vulkan-based rendering
+        vsync = 1;
+        # Turns vsync off for gl-based rendering
+        gl_vsync = 0;
+
+        # CPU
+        cpu_text= "CPU";
+        cpu_stats = true;
+        cpu_load_change = true;
+        cpu_load_value = "50,90";
+        cpu_load_color = "FFFFFF,FFAA7F,CC0000";
+        cpu_power = true;
+        cpu_color = "2E97CB";
+        ram = true;
+        ram_color = "C26693";
+
+        # GPU / VRAM
+        gpu_list = 0;
+        gpu_text= "GPU";
+        gpu_stats = true;
+        gpu_load_change = true;
+        gpu_load_value = "50,90";
+        gpu_load_color = "FFFFFF,FFAA7F,CC0000";
+        vram = true;
+        vram_color= "AD64C1";
+        gpu_power = true;
+        gpu_color = "2E9762";
+
+        # Miscellaneous 
+        engine_version = true;
+        engine_color = "EB5B5B";
+
+        wine = true;
+
+        # Logs
+        output_folder=/home/kuta/.local/share/mangohud/logs;
+        log_duration = 30;
+        log_interval = 100;
+        toggle_logging = "Shift_L+F2";
+      };
+*/
     };
 
     thunderbird = {
