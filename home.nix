@@ -17,6 +17,10 @@
     # or inputs.zen-browser.homeModules.twilight-official
   ];
 
+  # Sets user environmental variables thru Systemd i.e. 
+  # on other distros this would be thru ~/.config/environment.d
+  systemd.user.sessionVariables = { __GL_SHADER_DISK_CACHE_SIZE = "12000000000"; };
+
   services = {
     pipewire = {
       enable = true;
@@ -58,7 +62,6 @@
           ]
       '')
       ];  
-
     };
   };
 
@@ -84,12 +87,9 @@
             name = "Apple Music";
             url = "https://music.apple.com/us/new";
             manifestUrl = "https://music.apple.com/manifest.json";
-
           };
         };
-
       };
-
     };
 
    git = {
@@ -102,8 +102,6 @@
         init.defaultBranch = "main";
       }; 
     };
-
-#    discord.enable = true;
 
     mangohud = {
       enable = true;

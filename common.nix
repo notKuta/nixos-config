@@ -38,6 +38,7 @@
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
+      # Enables rnn-noise plugin to be made w/ home-manager
       extraLadspaPackages = [ pkgs.rnnoise-plugin pkgs.ladspaPlugins ];
 
       # If you want to use JACK applications, uncomment this
@@ -133,7 +134,12 @@
       nativeMessagingHosts.packages = [ pkgs.firefoxpwa ];
     };
 
-    steam.enable = true;
+    steam = {
+      enable = true;
+      # Fixes Xorg cursor issues
+      extraPackages = with pkgs; [ kdePackages.breeze ];
+
+    };
 
     vim = {
       enable = true;
