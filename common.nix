@@ -1,6 +1,13 @@
 { pkgs, config, inputs, ... }:
 
 {
+  # Sets garbage-collector to run every week
+  # and only delete generations older than 30 days
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than-30d";
+  };
 
   ########################
   #### DISPLAY SERVER ####
