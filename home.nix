@@ -69,6 +69,29 @@
       setAsDefaultBrowser = true;
     };
 
+    firefoxpwa = {
+      enable = true;
+      profiles = {
+        "01KYX600KEY64N6KDTG1T4MP1P" = {
+          name = "Apple Music Profile";
+          sites."01KYX600KE75YA53F0GN0M5FHG" = {
+            desktopEntry.categories = [ "Music" ];
+            desktopEntry.enable = true;
+            desktopEntry.icon = pkgs.fetchurl {
+              url = "https://upload.wikimedia.org/wikipedia/commons/5/5f/Apple_Music_icon.svg";
+              sha256 = "e17c3c7ad50b7a0b2b7dbade1493518338c76766c0513abd84f615d1c5048153";
+            };
+            name = "Apple Music";
+            url = "https://music.apple.com/us/new";
+            manifestUrl = "https://music.apple.com/manifest.json";
+
+          };
+        };
+
+      };
+
+    };
+
    git = {
       enable = true;
       settings = {
@@ -84,6 +107,7 @@
 
     mangohud = {
       enable = true;
+      # Much more options available (make sure to do!)
     };
 
     thunderbird = {
@@ -96,6 +120,7 @@
       font = {
         name = "Fira Code";
         size = 11;
+        package = pkgs.fira-code;
       };
       settings = {
         foreground = "#dde1e6";

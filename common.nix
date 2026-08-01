@@ -39,47 +39,7 @@
       alsa.support32Bit = true;
       pulse.enable = true;
       extraLadspaPackages = [ pkgs.rnnoise-plugin pkgs.ladspaPlugins ];
-      /*
-      extraConfig.pipewire = {"60-microphone-denoiser" = {
-        "context.modules" = [
-          { name = "libpipewire-module-rtkit"; args = { }; flags = [ "ifexists" "nofail" ]; }
-          {
-            name = "libpipewire-module-filter-chain";
-            args = {
-              "node.description" = "Microphone (noise suppressed)";
-              "media.name" = "Microphone (noise suppressed)";
-              "filter.graph" = {
-                nodes = [
-                  {
-                    type = "ladspa";
-                    name = "rnnoise";
-                    plugin = "librnnoise_ladspa";
-                    label = "noise_suppressor_mono";
-                    control = {
-                      "VAD Threshold (%)" = 50.0;
-                      "VAD Grace Period (ms)" = 200;
-                      "Retroactive VAD Grace (ms)" = 0;
-                    };
-                  }
-                ];
-              };
-              "audio.rate" = 48000;
-              "audio.position" = [ "FL" ];
 
-              "capture.props" = {
-                "node.passive" = true;
-                "node.name" = "input.microphone_rnnoise";
-              };
-
-              "playback.props" = {
-                "media.class" = "Audio/Source";
-                "node.name" = "output.microphone_rnnoise";
-              };
-            };
-          }
-        ];
-      };
-    };*/
       # If you want to use JACK applications, uncomment this
       #jack.enable = true;
 
@@ -121,6 +81,7 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
   # DNS Settings for systemd-resolve
   services.resolved = {
     enable = true;
@@ -141,17 +102,7 @@
         ];
     };
   };
-/*
-  # Nameservers 
-  networking.nameservers = [
-  ''
-  45.90.28.0#cd5dc8.dns.nextdns.io
-  2a07:a8c0::#cd5dc8.dns.nextdns.io
-  45.90.30.0#cd5dc8.dns.nextdns.io
-  2a07:a8c1::#cd5dc8.dns.nextdns.io
-  ''
-  ];
-*/  
+  
   security.tpm2 = {
     enable = true;
     abrmd.enable = true;
@@ -171,13 +122,16 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Forces Firefox to run under Xwayland; fixes menus not
+  # displaying correctly using FirefoxPWAs
+  environment.sessionVariables.MOZ_ENABLE_WAYLAND = "0";
+
   programs = { 
 
     firefox = {
       enable = true;
-      package = pkgs.firefox;
       nativeMessagingHosts.packages = [ pkgs.firefoxpwa ];
-    };    
+    };
 
     steam.enable = true;
 
@@ -209,8 +163,6 @@
      xivlauncher
      nixd
      marksman
-     fira-code
-     fira-code-symbols
      dust
      protonplus
      ungoogled-chromium
@@ -220,7 +172,6 @@
      kdePackages.filelight
      webcord
      firefoxpwa
-  #  pkgs.bash
   #  wget
   ];
 
@@ -232,6 +183,16 @@
   boot.loader.limine.enable = true;
   boot.loader.limine.efiSupport = pkgs.stdenv.hostPlatform.isEfi;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  swapDevices = [{ 
+     device = "/swapfile"; 
+     size = 32 * 1024; # 32 GiB
+  }];
+
+  boot.zswap = {
+    enable = true; 
+    # …
+  };
 
   ##############################
   ########### FLAKES ###########
@@ -261,11 +222,6 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
-
-  fonts.packages = with pkgs; [
-    fira-code
-    fira-code-symbols
-  ];
 
   ###########################################
   ################ PRINTING #################
