@@ -16,7 +16,7 @@
 
   # Installs `zenpower` kernel driver and plugs the `k10temp` kernel
   # module to read temperature & wattage (?) of AMD cpus 
-  boot.extraModulePackages = with config.boot.kernelPackages; [ zenpower ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ zenergy ];
   boot.kernelModules = { k10temp = true; };
   
    # Enable NVIDIA modules

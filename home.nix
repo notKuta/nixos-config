@@ -13,6 +13,7 @@
 
   xdg.configFile = {
     "MangoHud/MangoHud.conf".source = config.lib.file.mkOutOfStoreSymlink "/home/kuta/nixos-config/configs/MangoHud.conf";
+    "MangoHud/Stardew Valley.conf".source = config.lib.file.mkOutOfStoreSymlink "/home/kuta/nixos-config/configs/Stardew Valley.conf";
   };
 
   imports = [

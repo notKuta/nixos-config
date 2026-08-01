@@ -63,7 +63,7 @@
   users.users."kuta" = {
     isNormalUser = true;
     description = "kuta";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "gamemode" ];
     /*
     packages = with pkgs; [
       kdePackages.kate
@@ -144,7 +144,7 @@
     steam = {
       enable = true;
       # Fixes Xorg cursor issues
-      extraPackages = with pkgs; [ kdePackages.breeze mangohud];
+      extraPackages = with pkgs; [ kdePackages.breeze mangohud gamemode ];
 
     };
 
