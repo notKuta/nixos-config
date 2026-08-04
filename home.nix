@@ -78,6 +78,15 @@
       setAsDefaultBrowser = true;
     };
 
+# DRM-controlled media not playing when launching
+# PWA thru the DE desktop entry, but does work when
+# launched thru Firefox extension
+/*
+    firefox = {
+      enable = true;
+      nativeMessagingHosts = [ pkgs.firefoxpwa ];
+    };
+
     firefoxpwa = {
       enable = true;
       profiles = {
@@ -97,13 +106,13 @@
         };
       };
     };
-
+*/
    git = {
       enable = true;
       settings = {
         user = {
           name = "kuta";
-          email = "realfirestar731@gmail.com";
+          email = "graystripe63@posteo.net";
        };
         init.defaultBranch = "main";
       }; 

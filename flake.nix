@@ -17,14 +17,17 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    
+#    nix-flatpak.url = "github:gmodena/nix-flatpak/";
+
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: { # nix-flatpak,
     # replace '.poseidon' with new hostname if needed
     nixosConfigurations.poseidon = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
-      modules = [ ./desktop-configuration.nix 
+      modules = [ ./desktop-configuration.nix #nix-flatpak.nixosModules.nix-flatpak
         home-manager.nixosModules.default
         {
           home-manager = {

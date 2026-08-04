@@ -9,6 +9,19 @@
     options = "--delete-older-than-30d";
   };
 
+  services.flatpak.enable = true;
+/*
+  services.flatpak.packages = [
+    rec {
+      appId = "launcher.xiv-rb";
+      sha256 = "a3ee5f097cda46cadfc57dcb578c40a6b07c53118be7eb71dbd8329a2ce747bc";
+      bundle = "${pkgs.fetchurl {
+        url = "https://github.com/rankynbass/XIVLauncher.Core/releases/download/rb-v1.4.0.8/xivlauncher-rb.flatpak";
+        inherit sha256;
+      }}";
+    }
+  ];
+*/
   ########################
   #### DISPLAY SERVER ####
   ########################
@@ -135,16 +148,14 @@
   environment.sessionVariables.MOZ_ENABLE_WAYLAND = "0";
 
   programs = { 
-
     firefox = {
       enable = true;
       nativeMessagingHosts.packages = [ pkgs.firefoxpwa ];
     };
-
     steam = {
       enable = true;
       # Fixes Xorg cursor issues
-      extraPackages = with pkgs; [ kdePackages.breeze mangohud gamemode ];
+      extraPackages = with pkgs; [ kdePackages.breeze mangohud gamemode xivlauncher faugus-launcher ];
 
     };
 
