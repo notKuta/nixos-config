@@ -13,12 +13,12 @@
     
   };
 
-  outputs = { self, nixpkgs, home-manager, flatpaks, ... }@inputs: { # nix-flatpak,
+  outputs = { self, nixpkgs, home-manager, flatpaks, ... }@inputs: {
     # replace '.poseidon' with new hostname if needed
     nixosConfigurations.poseidon = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
-      modules = [ ./desktop-configuration.nix #nix-flatpak.nixosModules.nix-flatpak
+      modules = [ ./desktop-configuration.nix 
         home-manager.nixosModules.default
         {
           home-manager = {
