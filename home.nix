@@ -15,13 +15,13 @@
     "MangoHud/MangoHud.conf".source = config.lib.file.mkOutOfStoreSymlink "/home/kuta/nixos-config/configs/MangoHud.conf";
     "MangoHud/Stardew Valley.conf".source = config.lib.file.mkOutOfStoreSymlink "/home/kuta/nixos-config/configs/Stardew Valley.conf";
   };
-
+/*
   imports = [
     # or inputs.zen-browser.homeModules.beta
     inputs.zen-browser.homeModules.twilight
     # or inputs.zen-browser.homeModules.twilight-official
   ];
-
+*/
   # Sets user environmental variables thru Systemd i.e. 
   # on other distros this would be thru ~/.config/environment.d
   # ONLY WORKS on KDE and GNOME (https://wiki.archlinux.org/title/Environment_variables#Per_Wayland_session)
@@ -72,12 +72,6 @@
   };
 
   programs = {
-
-    zen-browser = {
-      enable = true;
-      setAsDefaultBrowser = true;
-    };
-
 # DRM-controlled media not playing when launching
 # PWA thru the DE desktop entry, but does work when
 # launched thru Firefox extension
@@ -126,6 +120,13 @@
 
     thunderbird = {
       enable = true;
+      profiles."default_new" = {
+        settings = {};
+        search.default = "ddg";
+        search.privateDefault = "ddg";
+        search.force = true;
+        isDefault = true;
+      };
       # Much more options available
     };
 

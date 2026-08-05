@@ -9,7 +9,26 @@
     options = "--delete-older-than-30d";
   };
 
-  services.flatpak.enable = true;
+  services.flatpak = {
+    enable = true;
+    remotes = {
+      "flathub" = "https://dl.flathub.org/repo/flathub.flatpakrepo";
+    };
+    packages = [
+      "flathub:app/app.zen_browser.zen/x86_64/stable"
+    ];
+    overrides = {
+      "global".Context = {
+        filesystems = [
+          "home"
+        ];
+        sockets = [
+          "!x11"
+          "!fallback-x11"
+        ];
+      };
+    };
+  };
 /*
   services.flatpak.packages = [
     rec {

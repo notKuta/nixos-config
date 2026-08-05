@@ -2,27 +2,18 @@
   description = "A flake to define the system (with unstable packages)";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
-      inputs = {
-      # IMPORTANT: To ensure compatibility with the latest Firefox version, use nixpkgs-unstable.
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
-      };
-    };
+   nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
-    home-manager = {
+   home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
-#    nix-flatpak.url = "github:gmodena/nix-flatpak/";
 
+    flatpaks.url = "github:in-a-dil-emma/declarative-flatpak/latest";
+    
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: { # nix-flatpak,
+  outputs = { self, nixpkgs, home-manager, flatpaks, ... }@inputs: { # nix-flatpak,
     # replace '.poseidon' with new hostname if needed
     nixosConfigurations.poseidon = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -38,6 +29,7 @@
             users.kuta = ./home.nix; # replace <kuta> with new username if changed
           };
         } 
+        flatpaks.nixosModules.default
       ];
     };
 /*
