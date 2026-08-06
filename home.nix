@@ -103,7 +103,7 @@
         middleButtonEmulation = false;
         naturalScroll = false;
         productId = "f520";
-        scrollSpeed = 2;
+        scrollSpeed = 1;
         vendorId = "3554";
       }
       ];
@@ -146,10 +146,18 @@
       # TO-DO: Copy metaphor wallpaper into nixos-config directory
       kscreenlocker.appearance.wallpaper = "/home/kuta/nixos-config/wallpapers/metaphor-three-gang.jpg";
       kscreenlocker.appearance.showMediaControls = true;
+      kscreenlocker.autoLock = false;
 
       shortcuts = {
         kwin = {
           "Switch to Next Desktop" = "Meta+Tab";
+        };
+        kmix = {
+          mic_mute = [
+            "Microphone Mute"
+            "Meta+Volume Mute"
+            "Num+Del"
+          ];
         };
       };
 

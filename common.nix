@@ -266,8 +266,21 @@
   ################ PRINTING #################
   ###########################################
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
+  # Enables auto-discovery of network printers
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    # Opens UDP Port 5353 in firewall
+    openFirewall = true;
+  };
+
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [
+      cups-filters
+      cups-browsed
+    ];
+  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
