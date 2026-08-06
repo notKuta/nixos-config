@@ -10,10 +10,16 @@
     };
 
     flatpaks.url = "github:in-a-dil-emma/declarative-flatpak/latest";
+
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
     
   };
 
-  outputs = { self, nixpkgs, home-manager, flatpaks, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, flatpaks, plasma-manager, ... }@inputs: {
     # replace '.poseidon' with new hostname if needed
     nixosConfigurations.poseidon = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -26,6 +32,7 @@
             useUserPackages = true;
             backupFileExtension = "bak";
             extraSpecialArgs = { inherit inputs; };
+            sharedModules = [plasma-manager.homeModules.plasma-manager ];
             users.kuta = ./home.nix; # replace <kuta> with new username if changed
           };
         } 

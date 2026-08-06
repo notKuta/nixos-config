@@ -15,13 +15,7 @@
     "MangoHud/MangoHud.conf".source = config.lib.file.mkOutOfStoreSymlink "/home/kuta/nixos-config/configs/MangoHud.conf";
     "MangoHud/Stardew Valley.conf".source = config.lib.file.mkOutOfStoreSymlink "/home/kuta/nixos-config/configs/Stardew Valley.conf";
   };
-/*
-  imports = [
-    # or inputs.zen-browser.homeModules.beta
-    inputs.zen-browser.homeModules.twilight
-    # or inputs.zen-browser.homeModules.twilight-official
-  ];
-*/
+
   # Sets user environmental variables thru Systemd i.e. 
   # on other distros this would be thru ~/.config/environment.d
   # ONLY WORKS on KDE and GNOME (https://wiki.archlinux.org/title/Environment_variables#Per_Wayland_session)
@@ -72,6 +66,174 @@
   };
 
   programs = {
+    plasma = {
+      enable = true;
+
+      # overrideConfig = true;
+
+      workspace = {
+      # Sets theme to Breeze Dark
+        lookAndFeel = "org.kde.breezedark.desktop";
+        theme = "breeze-dark";
+        wallpaper = "/home/kuta/nixos-config/wallpapers/metaphor-three-gang.jpg";
+        wallpaperFillMode = "preserveAspectCrop";
+      };
+
+      panels = [
+      {
+        alignment = "center";
+        extraSettings = null; # Extra shenangians with fillers and whatnot
+        floating = true;
+        height = 46;
+        hiding = "autohide";
+        lengthMode = "fill";
+        location = "bottom";
+        opacity = "adaptive";
+      }
+      
+      ];
+
+      input.mice = [
+      {
+        name = "Compx Teevo Terra Pro";  
+        enable = true;
+        acceleration = 0.36;
+        accelerationProfile = "none";
+        leftHanded = false;
+        middleButtonEmulation = false;
+        naturalScroll = false;
+        productId = "f520";
+        scrollSpeed = 2;
+        vendorId = "3554";
+      }
+      ];
+      # Controls how applications are restored on login
+      session.sessionRestore.restoreOpenApplicationsOnLogin = "startWithEmptySession";
+      krunner.shortcuts.launch = "Alt+Space";
+      krunner.position = "center";
+
+      fonts = {
+        general = {
+          family = "Noto Sans";
+          pointSize = 10;
+        };
+        fixedWidth = {
+          family = "Hack";
+          pointSize = 10;
+        };
+        small = {
+          family = "Noto Sans";
+          pointSize = 8;
+        };
+        toolbar = {
+          family = "Noto Sans";
+          pointSize = 10;
+        };
+        menu = {
+          family = "Noto Sans";
+          pointSize = 10;
+        };
+        windowTitle = {
+          family = "Noto Sans";
+          pointSize = 10;
+        };
+
+        general.styleStrategy.antialiasing = "prefer";
+      };
+
+      
+      # Sets the lockscreen wallpaper 
+      # TO-DO: Copy metaphor wallpaper into nixos-config directory
+      kscreenlocker.appearance.wallpaper = "/home/kuta/nixos-config/wallpapers/metaphor-three-gang.jpg";
+      kscreenlocker.appearance.showMediaControls = true;
+
+      shortcuts = {
+        kwin = {
+          "Switch to Next Desktop" = "Meta+Tab";
+        };
+      };
+
+      kwin = {
+        effects = {
+          desktopSwitching.navigationWrapping = true;
+          hideCursor.hideOnInactivity = 60;
+          desktopSwitching.animation = "slide";
+          minimization.animation = "squash";
+          windowOpenClose.animation = "scale";
+          dimAdminMode.enable = true;
+          hideCursor.enable = true;
+          shakeCursor.enable = true;
+        };
+
+        virtualDesktops.number = 2;
+      };
+
+      powerdevil = {
+        AC = {
+          autoSuspend.action = "sleep";
+          autoSuspend.idleTimeout = 1800;
+          dimDisplay.enable = true;
+          dimDisplay.idleTimeout = 600; 
+
+          displayBrightness = 25;
+          # keyboardBrightness = 50;
+          powerButtonAction = "shutDown";
+          powerProfile = "balanced";
+          turnOffDisplay.idleTimeout = 900;
+          turnOffDisplay.idleTimeoutWhenLocked = 60;
+
+          whenLaptopLidClosed = "sleep";
+          # whenSleepingEnter = Type: null or one of “hybridSleep”, “standby”, “standbyThenHibernate"
+        };
+
+        battery = {
+        # Hibernates after 30 minutes of inactivity on battery
+          autoSuspend.action = "hibernate";
+          autoSuspend.idleTimeout = 1800;
+
+        # Dims the display after 10 minutes of inactivity on battery
+          dimDisplay.enable = true;
+          dimDisplay.idleTimeout = 600;
+
+          dimKeyboard.enable = true;
+          keyboardBrightness = 20;
+          displayBrightness = 30;
+
+          powerButtonAction = "shutDown";
+          powerProfile = "powerSaving";
+
+          turnOffDisplay.idleTimeout = 900;
+          turnOffDisplay.idleTimeoutWhenLocked = 60;
+
+          whenLaptopLidClosed = "hibernate";
+          # Change to what you want
+          whenSleepingEnter = null; # Type: null or one of “hybridSleep”, “standby”, “standbyThenHibernate”
+        };
+
+        batteryLevels.criticalLevel = 5;
+        batteryLevels.lowLevel = 20;
+        general.pausePlayersOnSuspend = true;
+
+        lowBattery = {
+          powerProfile = "powerSaving";
+          autoSuspend.action = "shutDown";
+          autoSuspend.idleTimeout = 600;
+
+          dimDisplay.enable = true;
+          dimDisplay.idleTimeout = 180;
+
+          dimKeyboard.enable = true;
+          displayBrightness = 10;
+          keyboardBrightness = 0;
+
+          powerButtonAction = "shutDown";
+          turnOffDisplay.idleTimeout = 300;
+          turnOffDisplay.idleTimeoutWhenLocked = 60;
+          whenLaptopLidClosed = "shutDown";
+          whenSleepingEnter = "standbyThenHibernate";
+        };
+      };
+    };
 # DRM-controlled media not playing when launching
 # PWA thru the DE desktop entry, but does work when
 # launched thru Firefox extension
