@@ -191,7 +191,7 @@
           turnOffDisplay.idleTimeoutWhenLocked = 60;
 
           whenLaptopLidClosed = "sleep";
-          # whenSleepingEnter = Type: null or one of “hybridSleep”, “standby”, “standbyThenHibernate"
+          whenSleepingEnter = "standby"; # Type: null or one of “hybridSleep”, “standby”, “standbyThenHibernate"
         };
 
         battery = {
@@ -250,9 +250,12 @@
       enable = true;
       nativeMessagingHosts = [ pkgs.firefoxpwa ];
     };
-
+*/
     firefoxpwa = {
       enable = true;
+      package = pkgs.firefoxpwa.overrideAttrs (prev: {
+        libs = "${pkgs.firefox.libs}:${prev.libs}";
+      });
       profiles = {
         "01KYX600KEY64N6KDTG1T4MP1P" = {
           name = "Apple Music Profile";
@@ -264,13 +267,13 @@
               sha256 = "e17c3c7ad50b7a0b2b7dbade1493518338c76766c0513abd84f615d1c5048153";
             };
             name = "Apple Music";
-            url = "https://music.apple.com/us/new";
+            url = "https://music.apple.com/us/home";
             manifestUrl = "https://music.apple.com/manifest.json";
           };
         };
       };
     };
-*/
+
    git = {
       enable = true;
       settings = {

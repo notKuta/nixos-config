@@ -163,6 +163,7 @@
     firefox = {
       enable = true;
       nativeMessagingHosts.packages = [ pkgs.firefoxpwa ];
+      package = pkgs.firefox;
     };
     steam = {
       enable = true;
@@ -210,7 +211,8 @@
      haruna
      kdePackages.filelight
      webcord
-     firefoxpwa
+     pcsx2
+     steam-rom-manager
   #  wget
   ];
 
@@ -232,6 +234,8 @@
     enable = true; 
     # …
   };
+
+  boot.initrd.systemd.enable = true;
 
   ##############################
   ########### FLAKES ###########
@@ -305,5 +309,8 @@
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
-
+  
+  # Enables the power-profiles-daemon
+  # Allows profile integration w/ powerdevil KDE package
+  services.power-profiles-daemon.enable = true;
 }
