@@ -106,8 +106,44 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Enable networking
-  networking.networkmanager.enable = true;
+  # Enable networking and set static nameservers not to override our custom dns
+  networking = {
+    nameservers = [ "127.0.0.1" "::1" ];
+    networkmanager.enable = true;
+    networkmanager.dns = "none";
+  };
+
+  services.dnsproxy = {
+    enable = true;
+    settings = {
+      listen-addrs = [ "0.0.0.0" ];
+
+      upstream = [ 
+        "192.168.4.225"
+      ];
+
+      listen-ports = [ 53 ]; 
+
+      fallback = [
+        "https://dns.quad9.net/dns-query" "tls://dns.quad9.net"
+      ]; 
+
+      bootstrap = [
+        "9.9.9.9" "149.112.112.112" "2620:fe::fe" "2620:fe::9"
+      ];
+
+      https-port = [ 443 ];
+      tls-port = [ 853 ];
+    };
+  };
+
+/*
+  services.dnscrypt-proxy = {
+    enable = true;
+    settings = { 
+    };
+  };
+*/
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -115,27 +151,6 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  # DNS Settings for systemd-resolve
-  services.resolved = {
-    enable = true;
-    settings.Resolve = {
-        DNSOverTLS = "true";
-        DNSSEC = "true";
-        Domains = [ "~." ];
-        DNS =
-        ''
-        DNS=45.90.28.0#cd5dc8.dns.nextdns.io
-        DNS=2a07:a8c0::#cd5dc8.dns.nextdns.io
-        DNS=45.90.30.0#cd5dc8.dns.nextdns.io
-        DNS=2a07:a8c1::#cd5dc8.dns.nextdns.io
-        '';
-        FallbackDNS = [
-          "1.1.1.1"
-          "1.0.0.1"
-        ];
-    };
-  };
-  
   security.tpm2 = {
     enable = true;
     abrmd.enable = true;
@@ -213,6 +228,7 @@
      webcord
      pcsx2
      steam-rom-manager
+     qbittorrent
   #  wget
   ];
 

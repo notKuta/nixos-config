@@ -291,6 +291,8 @@
       # See above and edit the file under configs/ if wanted
     };
 
+    prismlauncher.enable = true;
+
     thunderbird = {
       enable = true;
       profiles."default_new" = {
