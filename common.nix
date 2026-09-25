@@ -100,19 +100,20 @@
   ###### NETWORKING ######
   ########################
 
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking and set static nameservers not to override our custom dns
+  # DNS shenangians below
+/*      
   networking = {
     nameservers = [ "127.0.0.1" "::1" ];
     networkmanager.enable = true;
     networkmanager.dns = "none";
   };
-
   services.dnsproxy = {
     enable = true;
     settings = {
@@ -123,7 +124,7 @@
       ];
 
       listen-ports = [ 53 ]; 
-/*
+
       fallback = [
         "https://dns.quad9.net/dns-query" "tls://dns.quad9.net"
       ]; 
@@ -134,11 +135,10 @@
 
       https-port = [ 443 ];
       tls-port = [ 853 ];
-      */
     };
   };
 
-/*
+
   services.dnscrypt-proxy = {
     enable = true;
     settings = { 
