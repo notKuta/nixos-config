@@ -204,7 +204,7 @@ on what device your luks layer is stored on):
 
 ```console
 # systemd-cryptenroll /dev/nvme0n1p2 --recovery-key
-# systemd-cryptenroll /dev/nvme0n1p2 --wipe-slot=empty --tpm2-device=auto --tpm2-pcrs=4+9+12:sha256=0000000000000000000000000000000000000000000000000000000000000000
+# systemd-cryptenroll /dev/nvme0n1p2 --wipe-slot=empty --tpm2-device=auto --tpm2-pcrs=4+12+15:sha256=0000000000000000000000000000000000000000000000000000000000000000
 ```
 
 If using secure boot, you can use the PCR policies of `4+7+8+9` as a sane default.
@@ -216,7 +216,7 @@ If using secure boot, you can use the PCR policies of `4+7+8+9` as a sane defaul
 
 ## Sources
 
-https://nixos.org/manual/nixos/stable/#sec-installation
+https://nixos.org/manual/nixos/stable/\#sec-installation
 
 https://wiki.nixos.org/wiki/Full_Disk_Encryption
 
