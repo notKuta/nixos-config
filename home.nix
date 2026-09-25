@@ -304,6 +304,11 @@
       };
       # Much more options available
     };
+    
+    vscode = {
+      enable = true;
+      package = pkgs.vscode.fhs;
+    };
 
     kitty = {
       enable = true;

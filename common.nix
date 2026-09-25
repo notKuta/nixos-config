@@ -123,7 +123,7 @@
       ];
 
       listen-ports = [ 53 ]; 
-
+/*
       fallback = [
         "https://dns.quad9.net/dns-query" "tls://dns.quad9.net"
       ]; 
@@ -134,6 +134,7 @@
 
       https-port = [ 443 ];
       tls-port = [ 853 ];
+      */
     };
   };
 
@@ -229,6 +230,7 @@
      pcsx2
      steam-rom-manager
      qbittorrent
+     audacity
   #  wget
   ];
 
