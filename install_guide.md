@@ -43,7 +43,7 @@ command replacing `/dev/disk/by-id/usb-My_flash_drive` with e.g.
 of=/dev/disk/by-id/usb-My_flash_drive conv=fsync oflag=direct status=progress
 ```
 
-> ![caution]
+> [!caution]
 > Do **NOT** append a partition number to the name of the USB device. Make sure
 > that your USB device ends with `-0:0` and not anything else.
 
