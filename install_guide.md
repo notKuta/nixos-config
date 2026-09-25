@@ -231,7 +231,7 @@ security.tpm2 = {
 }
 ```
 
-Then, do the following where we use `/dev/nvme0n1p2` as our `device` (use `lsblk` to see
+Then, run the following where we use `/dev/nvme0n1p2` as our `device` (use `lsblk` to see
 on what device your luks layer is stored on):
 
 ```console
@@ -244,11 +244,11 @@ If using secure boot, you can use the PCR policies of `4+7+8+9` as a sane defaul
 > [!caution]
 > Make sure to store your recovery key in a secure location. This is what you will
 > use if your TPM device cannot authenticate properly e.g. if one of the PCR policies
-> gets triggered.
+> gets triggered. If you do not store these, then you will be locked out of your computer.
 
 ## Sources
 
-https://nixos.org/manual/nixos/stable/\#sec-installation
+https://nixos.org/manual/nixos/stable/#sec-installation
 
 https://wiki.nixos.org/wiki/Full_Disk_Encryption
 
