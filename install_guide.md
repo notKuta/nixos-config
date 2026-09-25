@@ -39,8 +39,7 @@ command replacing `/dev/disk/by-id/usb-My_flash_drive` with e.g.
 `/dev/disk/by-id/usb-SanDisk_SanDisk_3.2_Gen1_A2003AEB1D2C6C63-0:0`:
 
 ```console
-# dd bs=4M if=path/to/archlinux-version-x86_64.iso
-of=/dev/disk/by-id/usb-My_flash_drive conv=fsync oflag=direct status=progress
+# dd bs=4M if=path/to/archlinux-version-x86_64.iso of=/dev/disk/by-id/usb-My_flash_drive conv=fsync oflag=direct status=progress
 ```
 
 > [!caution]
