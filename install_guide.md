@@ -14,6 +14,39 @@ could be declaratively defined but such is life.
 Refer to [NixOS manual](https://nixos.org/manual/nixos/stable/) to see
 the pre-installation process i.e. obtaining the .iso, burning it, etc.
 
+> [!caution]
+> Burning anything to a USB drive will usually completely **wipe** the drive
+> of any data it has. Make sure you do not have any important files on
+> it before continuing.
+
+A quick reference on burning the ISO to a USB drive for devices already
+running GNU/Linux will be detailed below:
+
+We first must find the name of the USB drive. To do so, run:
+
+```console
+ls -l /dev/disk/by-id/usb-*
+```
+
+Then, check that the drive is not mounted by:
+
+```console
+lsblk -f
+```
+
+If all is good, and you found the name of the USB drive, run the following
+command replacing `/dev/disk/by-id/usb-My_flash_drive` with e.g.
+`/dev/disk/by-id/usb-SanDisk_SanDisk_3.2_Gen1_A2003AEB1D2C6C63-0:0`:
+
+```console
+# dd bs=4M if=path/to/archlinux-version-x86_64.iso
+of=/dev/disk/by-id/usb-My_flash_drive conv=fsync oflag=direct status=progress
+```
+
+> ![caution]
+> Do **NOT** append a partition number to the name of the USB device. Make sure
+> that your USB device ends with `-0:0` and not anything else.
+
 ## Getting Started
 
 Before starting, check that your NVMe drive is using its [optimal logical sector size.](https://wiki.archlinux.org/title/Advanced_Format)
@@ -223,3 +256,5 @@ https://wiki.nixos.org/wiki/Full_Disk_Encryption
 https://wiki.archlinux.org/title/Systemd-cryptenroll
 
 https://wiki.archlinux.org/title/Dm-crypt/Encrypting_an_entire_system#LUKS_on_a_partition_with_TPM2_and_Secure_Boot
+
+https://wiki.archlinux.org/title/USB_flash_installation_medium
