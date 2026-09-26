@@ -208,11 +208,6 @@
   boot.loader.limine.efiSupport = pkgs.stdenv.hostPlatform.isEfi;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  swapDevices = [{ 
-     device = "/swapfile"; 
-     size = 32 * 1024; # 32 GiB
-  }];
-
   boot.zswap = {
     enable = true; 
     # …
@@ -296,4 +291,10 @@
   # Enables the power-profiles-daemon
   # Allows profile integration w/ powerdevil KDE package
   services.power-profiles-daemon.enable = true;
+
+  # Enable bluetooth
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = false;
+  };
 }

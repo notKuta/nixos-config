@@ -11,8 +11,14 @@
       # Includes the common, shared packages between systems
       ../common.nix
     ];
+
   # Set hostname
   networking.hostName = "poseidon";
+
+  swapDevices = [{
+     device = "/swapfile";
+     size = 32 * 1024; # 32 GiB
+  }];
 
   # Installs `zenpower` kernel driver and plugs the `k10temp` kernel
   # module to read temperature & wattage (?) of AMD Ryzen cpus 
