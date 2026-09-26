@@ -111,6 +111,31 @@
     networkmanager.enable = true;
   };
 
+  # TAILSCALE NETWORKING STACK
+  # OPTIMIZATIONS MADE FOR MODERN NFTABLES INSTEAD OF LEGACY IPTABLES
+   # 1. Enable the service and the firewall
+  services.tailscale.enable = true;
+  services.tailscale.useRoutingFeatures = "client";
+  networking.nftables.enable = true;
+  networking.firewall = {
+    enable = true;
+    # Always allow traffic from your Tailscale network
+    trustedInterfaces = [ config.services.tailscale.interfaceName ];
+    # Allow the Tailscale UDP port through the firewall
+    allowedUDPPorts = [ config.services.tailscale.port ];
+  };
+
+  # 2. Force tailscaled to use nftables (Critical for clean nftables-only systems)
+  # This avoids the "iptables-compat" translation layer issues.
+  systemd.services.tailscaled.serviceConfig.Environment = [ 
+    "TS_DEBUG_FIREWALL_MODE=nftables" 
+  ];
+
+  # 3. Optimization: Prevent systemd from waiting for network online 
+  # (Optional but recommended for faster boot with VPNs)
+  systemd.network.wait-online.enable = false; 
+  boot.initrd.systemd.network.wait-online.enable = false;
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
@@ -196,6 +221,7 @@
      steam-rom-manager
      qbittorrent
      audacity
+     usbutils
   #  wget
   ];
 
@@ -297,4 +323,6 @@
     enable = true;
     powerOnBoot = false;
   };
+  # Enable fwupd for firmware updates
+  services.fwupd.enable = true;
 }

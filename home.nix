@@ -88,6 +88,26 @@
       
       ];
 
+      input.touchpads = [
+      {
+        name = "PIXA3854:00 093A:1343 Touchpad";
+        enable = true;
+        accelerationProfile = "default";
+        scrollSpeed = 1.0;
+        pointerSpeed = .26;
+        naturalScroll = true;
+        leftHanded = false;
+        middleButtonEmulation = false;
+        scrollMethod = "twoFingers";
+        tapAndDrag = true;
+        tapToClick = true;
+        twoFingerTap = "rightClick";
+        vendorId = "093a";
+        productId = "1343";
+        disableWhileTyping = true;
+      }
+      ];
+
       input.mice = [
       {
         name = "Compx Teevo Terra Pro";  
@@ -169,6 +189,7 @@
         };
 
         virtualDesktops.number = 2;
+        virtualDesktops.rows = 1;
       };
 
       powerdevil = {
