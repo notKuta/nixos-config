@@ -33,7 +33,7 @@
             backupFileExtension = "bak";
             extraSpecialArgs = { inherit inputs; };
             sharedModules = [plasma-manager.homeModules.plasma-manager ];
-            users.kuta = ./home.nix; # replace <kuta> with new username if changed
+            users.kuta = ./desktop-home.nix; # replace <kuta> with new username if changed
           };
         } 
         flatpaks.nixosModules.default
@@ -53,7 +53,7 @@
             backupFileExtension = "bak";
             extraSpecialArgs = { inherit inputs; };
             sharedModules = [plasma-manager.homeModules.plasma-manager ];
-            users.kuta = ./home.nix; # replace <kuta> with new username if changed
+            users.kuta = ./laptop-home.nix; # replace <kuta> with new username if changed
           };
         } 
         flatpaks.nixosModules.default
