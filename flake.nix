@@ -24,7 +24,7 @@
     nixosConfigurations.poseidon = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
-      modules = [ ./desktop-configuration.nix 
+      modules = [ ./desktop/desktop-configuration.nix 
         home-manager.nixosModules.default
         {
           home-manager = {
@@ -33,7 +33,7 @@
             backupFileExtension = "bak";
             extraSpecialArgs = { inherit inputs; };
             sharedModules = [plasma-manager.homeModules.plasma-manager ];
-            users.kuta = ./desktop-home.nix; # replace <kuta> with new username if changed
+            users.kuta = ./desktop/desktop-home.nix; # replace <kuta> with new username if changed
           };
         } 
         flatpaks.nixosModules.default
@@ -44,7 +44,7 @@
     nixosConfigurations.neptune = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
-      modules = [ ./laptop-configuration.nix 
+      modules = [ ./laptop/laptop-configuration.nix 
         home-manager.nixosModules.default 
         {
           home-manager = {
@@ -53,7 +53,7 @@
             backupFileExtension = "bak";
             extraSpecialArgs = { inherit inputs; };
             sharedModules = [plasma-manager.homeModules.plasma-manager ];
-            users.kuta = ./laptop-home.nix; # replace <kuta> with new username if changed
+            users.kuta = ./laptop/laptop-home.nix; # replace <kuta> with new username if changed
           };
         } 
         flatpaks.nixosModules.default

@@ -9,7 +9,7 @@
     [ # Include the results of the hardware scan.
       ./laptop-hardware-configuration.nix
       # Include common files
-      ./common.nix
+      ../common.nix
     ];
 
   networking.hostName = "neptune"; # Define your hostname.
