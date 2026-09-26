@@ -27,12 +27,20 @@
   # Enables use of fingerprint reader for unlocking the user / system during the
   # display manager
 
+  # THERE IS A CURRENT ISSUE WITH SDDM WHERE YOU CANNOT UNLOCK THE DISPLAY MANAGER
+  # WITH ONLY THE FINGERPRINT READER OR WITH ONLY THE PASSWORD; IT IS IMPOSSIBLE FOR
+  # ONLY FINGERPRINT READER; IT IS POSSIBLE WITH PASSWORD BUT YOU MUST INPUT YOUR FINGERPRINT
+  # AFTER INPUTTING YOUR PASSWORD OR ELSE THE LOGIN WILL HANG (SDDM DOES NOT WARM YOU OF THIS)
+  # SO ITS A SUBPAR EXPERIENCE
+
+  # ALSO THE THREE COMMENTS LINES ARE THE ONES ACTUALLED USED FOR THIS SYSTEM
+
   # Install the driver
-  services.fprintd.enable = true;
+  ###services.fprintd.enable = true;
   # If simply enabling fprintd is not enough, try enabling fprintd.tod...
-  services.fprintd.tod.enable = true;
+  ###services.fprintd.tod.enable = true;
   # ...and use one of the next four drivers
-  services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix; # Goodix driver module
+  ###services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix; # Goodix driver module
   # services.fprintd.tod.driver = pkgs.libfprint-2-tod1-elan; # Elan(04f3:0c4b) driver
   # services.fprintd.tod.driver = pkgs.libfprint-2-tod1-vfs0090; # (Marked as broken as of 2025/04/23!) driver for 2016 ThinkPads
   # services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix-550a; # Goodix 550a driver (from Lenovo)
