@@ -20,6 +20,8 @@
      size = 32 * 1024; # 32 GiB
   }];
 
+  programs.coolercontrol.enable = true;
+
   # Installs `zenpower` kernel driver and plugs the `k10temp` kernel
   # module to read temperature & wattage (?) of AMD Ryzen cpus 
   boot.extraModulePackages = with config.boot.kernelPackages; [ zenergy ];

@@ -11,6 +11,9 @@
 
   services.flatpak = {
     enable = true;
+    # W/ v.4.2.0 declarative-flatpak has changed behavior
+    # and this reverts it back to original behavior
+    runWithoutGui = true;
     remotes = {
       "flathub" = "https://dl.flathub.org/repo/flathub.flatpakrepo";
     };
@@ -189,7 +192,8 @@
       interactiveShellInit = "fastfetch";
     };
 
-    coolercontrol.enable = true;
+    # Moved to desktop-specific config so framework laptop has seperate
+    # coolercontrol.enable = true;
 
     gamemode.enable = true;
 
@@ -222,6 +226,7 @@
      qbittorrent
      audacity
      usbutils
+     tree
   #  wget
   ];
 
@@ -230,8 +235,12 @@
   ##############################
 
   # Bootloader.
-  boot.loader.limine.enable = true;
-  boot.loader.limine.efiSupport = pkgs.stdenv.hostPlatform.isEfi;
+  boot.loader.limine = {
+    enable = true;
+    efiSupport = pkgs.stdenv.hostPlatform.isEfi;
+    extraConfig = "timeout: 0\n";
+  };
+  
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.zswap = {
