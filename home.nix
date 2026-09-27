@@ -92,16 +92,20 @@
       {
         name = "PIXA3854:00 093A:1343 Touchpad";
         enable = true;
+	# Type: null or one of "default" or "none"
         accelerationProfile = "default";
-        scrollSpeed = 1.0;
-        pointerSpeed = .26;
+        scrollSpeed = 0.3;
+        pointerSpeed = .21;
         naturalScroll = true;
         leftHanded = false;
         middleButtonEmulation = false;
         scrollMethod = "twoFingers";
+        # Setting both `rightClickMethod` and `twoFingerTap` might
+        # be unnecessary but not sure
+        rightClickMethod = "twoFingers";
+        twoFingerTap = "rightClick";
         tapAndDrag = true;
         tapToClick = true;
-        twoFingerTap = "rightClick";
         vendorId = "093a";
         productId = "1343";
         disableWhileTyping = true;
@@ -211,13 +215,13 @@
         };
 
         battery = {
-        # Hibernates after 30 minutes of inactivity on battery
-          autoSuspend.action = "hibernate";
-          autoSuspend.idleTimeout = 1800;
+        # Hibernates after 10 minutes of inactivity on battery
+          autoSuspend.action = "sleep";
+          autoSuspend.idleTimeout = 600;
 
-        # Dims the display after 10 minutes of inactivity on battery
+        # Dims the display after 5 minutes of inactivity on battery
           dimDisplay.enable = true;
-          dimDisplay.idleTimeout = 600;
+          dimDisplay.idleTimeout = 300;
 
           dimKeyboard.enable = true;
           keyboardBrightness = 20;
@@ -226,34 +230,35 @@
           powerButtonAction = "shutDown";
           powerProfile = "powerSaving";
 
-          turnOffDisplay.idleTimeout = 900;
+          turnOffDisplay.idleTimeout = 600;
           turnOffDisplay.idleTimeoutWhenLocked = 60;
 
-          whenLaptopLidClosed = "hibernate";
+          whenLaptopLidClosed = "sleep";
           # Change to what you want
-          whenSleepingEnter = null; # Type: null or one of “hybridSleep”, “standby”, “standbyThenHibernate”
+          whenSleepingEnter = "hybridSleep"; # Type: null or one of “hybridSleep”, “standby”, “standbyThenHibernate”
         };
 
-        batteryLevels.criticalLevel = 5;
+        batteryLevels.criticalLevel = 10;
         batteryLevels.lowLevel = 20;
         general.pausePlayersOnSuspend = true;
 
         lowBattery = {
           powerProfile = "powerSaving";
-          autoSuspend.action = "shutDown";
-          autoSuspend.idleTimeout = 600;
+        # Hibernates after 5 mins of inactivity
+          autoSuspend.action = "hibernate";
+          autoSuspend.idleTimeout = 300;
 
           dimDisplay.enable = true;
           dimDisplay.idleTimeout = 180;
 
           dimKeyboard.enable = true;
-          displayBrightness = 10;
-          keyboardBrightness = 0;
+          displayBrightness = 15;
+          keyboardBrightness = 20;
 
           powerButtonAction = "shutDown";
           turnOffDisplay.idleTimeout = 300;
           turnOffDisplay.idleTimeoutWhenLocked = 60;
-          whenLaptopLidClosed = "shutDown";
+          whenLaptopLidClosed = "hibernate";
           whenSleepingEnter = "standbyThenHibernate";
         };
       };

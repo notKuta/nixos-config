@@ -323,6 +323,7 @@
     enable = true;
     powerOnBoot = false;
   };
+
   # Enable fwupd for firmware updates
   services.fwupd.enable = true;
 }
