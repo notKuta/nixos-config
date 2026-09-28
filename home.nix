@@ -199,18 +199,18 @@
       powerdevil = {
         AC = {
           autoSuspend.action = "sleep";
-          autoSuspend.idleTimeout = 1800;
+          autoSuspend.idleTimeout = 3600;
           dimDisplay.enable = true;
-          dimDisplay.idleTimeout = 600; 
+          dimDisplay.idleTimeout = 2700; 
 
           displayBrightness = 25;
           # keyboardBrightness = 50;
           powerButtonAction = "shutDown";
           powerProfile = "balanced";
-          turnOffDisplay.idleTimeout = 900;
+          turnOffDisplay.idleTimeout = 3600;
           turnOffDisplay.idleTimeoutWhenLocked = 60;
 
-          whenLaptopLidClosed = "sleep";
+          whenLaptopLidClosed = "doNothing";
           whenSleepingEnter = "standby"; # Type: null or one of “hybridSleep”, “standby”, “standbyThenHibernate"
         };
 
@@ -224,7 +224,7 @@
           dimDisplay.idleTimeout = 300;
 
           dimKeyboard.enable = true;
-          keyboardBrightness = 20;
+          # keyboardBrightness = 20;
           displayBrightness = 30;
 
           powerButtonAction = "shutDown";

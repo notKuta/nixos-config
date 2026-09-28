@@ -99,10 +99,13 @@
     ];*/
   };
 
+  
+
   ########################
   ###### NETWORKING ######
   ########################
 
+  # Useless if running networkmanager
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -113,7 +116,7 @@
   networking = {
     networkmanager.enable = true;
   };
-
+/*
   # TAILSCALE NETWORKING STACK
   # OPTIMIZATIONS MADE FOR MODERN NFTABLES INSTEAD OF LEGACY IPTABLES
    # 1. Enable the service and the firewall
@@ -138,7 +141,7 @@
   # (Optional but recommended for faster boot with VPNs)
   systemd.network.wait-online.enable = false; 
   boot.initrd.systemd.network.wait-online.enable = false;
-
+*/
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
