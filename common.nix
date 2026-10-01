@@ -116,12 +116,20 @@
   networking = {
     networkmanager.enable = true;
   };
+/*
+
+  ################################
+  Tailscale currently breaks DNS
+  if enabled. Have to troubleshoot
+  and fix at some point. The WiKi
+  would be a good place to start.`
+  ################################
 
   # TAILSCALE NETWORKING STACK
   # OPTIMIZATIONS MADE FOR MODERN NFTABLES INSTEAD OF LEGACY IPTABLES
    # 1. Enable the service and the firewall
   services.tailscale.enable = true;
-  services.tailscale.useRoutingFeatures = "client";
+#  services.tailscale.useRoutingFeatures = "client";
   networking.nftables.enable = true;
   networking.firewall = {
     enable = true;
@@ -144,7 +152,8 @@
 
   # 4. (USER-ADDED) Use Systemd-resolve or else DNS seemingly doesn't work...
   services.resolved.enable = true;
-
+  networking.useNetworkd = false;
+*/
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
