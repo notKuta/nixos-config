@@ -116,7 +116,7 @@
   networking = {
     networkmanager.enable = true;
   };
-/*
+
   # TAILSCALE NETWORKING STACK
   # OPTIMIZATIONS MADE FOR MODERN NFTABLES INSTEAD OF LEGACY IPTABLES
    # 1. Enable the service and the firewall
@@ -141,7 +141,10 @@
   # (Optional but recommended for faster boot with VPNs)
   systemd.network.wait-online.enable = false; 
   boot.initrd.systemd.network.wait-online.enable = false;
-*/
+
+  # 4. (USER-ADDED) Use Systemd-resolve or else DNS seemingly doesn't work...
+  services.resolved.enable = true;
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
