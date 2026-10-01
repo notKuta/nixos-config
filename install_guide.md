@@ -105,12 +105,12 @@ If all looks good, type `w` and the partition table will be written.
 
 ## Encryption
 
-Here, we will setup the luks encryption layer using `/dev/nvme0n1` as our device:
+Here, we will setup the luks encryption layer using `/dev/nvme0n1p2` as our device:
 
 ```console
-# cryptsetup luksFormat /dev/nvme0n1
+# cryptsetup luksFormat /dev/nvme0n1p2
 
-# cryptsetup luksOpen /dev/nvme0n1 cryptroot
+# cryptsetup luksOpen /dev/nvme0n1p2 cryptroot
 ```
 
 Now format the drive to whatever filesystem you wish; here we will use `ext4` and

@@ -241,7 +241,7 @@
   boot.loader.limine = {
     enable = true;
     efiSupport = pkgs.stdenv.hostPlatform.isEfi;
-    extraConfig = "timeout: 0\n";
+    extraConfig = "timeout: 1\n";
   };
   
   boot.loader.efi.canTouchEfiVariables = true;
