@@ -11,6 +11,7 @@
   # changes in each release.
   home.stateVersion = "26.11";
 
+  # Symlinks configs from nixos-config directory to `.config/` 
   xdg.configFile = {
     "MangoHud/MangoHud.conf".source = config.lib.file.mkOutOfStoreSymlink "/home/kuta/nixos-config/configs/MangoHud.conf";
     "MangoHud/Stardew Valley.conf".source = config.lib.file.mkOutOfStoreSymlink "/home/kuta/nixos-config/configs/Stardew Valley.conf";
@@ -162,7 +163,6 @@
 
       
       # Sets the lockscreen wallpaper 
-      # TO-DO: Copy metaphor wallpaper into nixos-config directory
       kscreenlocker.appearance.wallpaper = "/home/kuta/nixos-config/wallpapers/metaphor-three-gang.jpg";
       kscreenlocker.appearance.showMediaControls = true;
       kscreenlocker.autoLock = false;
@@ -263,15 +263,7 @@
         };
       };
     };
-# DRM-controlled media not playing when launching
-# PWA thru the DE desktop entry, but does work when
-# launched thru Firefox extension
-/*
-    firefox = {
-      enable = true;
-      nativeMessagingHosts = [ pkgs.firefoxpwa ];
-    };
-*/
+
     firefoxpwa = {
       enable = true;
       package = pkgs.firefoxpwa.overrideAttrs (prev: {

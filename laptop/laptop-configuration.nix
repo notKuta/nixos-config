@@ -24,32 +24,40 @@
   # accidentally delete configuration.nix.
   # system.copySystemConfiguration = true;
 
-  # Enables use of fingerprint reader for unlocking the user / system during the
-  # display manager
+  # TAILSCALE NETWORKING STACK
+  # OPTIMIZATIONS MADE FOR MODERN NFTABLES INSTEAD OF LEGACY IPTABLES
+  # Enable the service and the firewall
+    services.tailscale.enable = true;
+    services.tailscale.useRoutingFeatures = "client";
+    networking.nftables.enable = true;
+    networking.firewall = {
+      enable = true;
+      # Always allow traffic from your Tailscale network
+      trustedInterfaces = [ config.services.tailscale.interfaceName ];
+      # Allow the Tailscale UDP port through the firewall
+      allowedUDPPorts = [ config.services.tailscale.port ];
+  };
 
-  # THERE IS A CURRENT ISSUE WITH SDDM WHERE YOU CANNOT UNLOCK THE DISPLAY MANAGER
-  # WITH ONLY THE FINGERPRINT READER OR WITH ONLY THE PASSWORD; IT IS IMPOSSIBLE FOR
-  # ONLY FINGERPRINT READER; IT IS POSSIBLE WITH PASSWORD BUT YOU MUST INPUT YOUR FINGERPRINT
-  # AFTER INPUTTING YOUR PASSWORD OR ELSE THE LOGIN WILL HANG (SDDM DOES NOT WARM YOU OF THIS)
-  # SO ITS A SUBPAR EXPERIENCE
+  # Force tailscaled to use nftables (Critical for clean nftables-only systems)
+  # This avoids the "iptables-compat" translation layer issues.
+  systemd.services.tailscaled.serviceConfig.Environment = [ 
+    "TS_DEBUG_FIREWALL_MODE=nftables" 
+  ];
 
-  # ALSO THE THREE COMMENTS LINES ARE THE ONES ACTUALLED USED FOR THIS SYSTEM
+  # Optimization: Prevent systemd from waiting for network online 
+  # (Optional but recommended for faster boot with VPNs)
+  systemd.network.wait-online.enable = false; 
+  boot.initrd.systemd.network.wait-online.enable = false;
 
-  # Install the driver
-  ###services.fprintd.enable = true;
-  # If simply enabling fprintd is not enough, try enabling fprintd.tod...
-  ###services.fprintd.tod.enable = true;
-  # ...and use one of the next four drivers
-  ###services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix; # Goodix driver module
-  # services.fprintd.tod.driver = pkgs.libfprint-2-tod1-elan; # Elan(04f3:0c4b) driver
-  # services.fprintd.tod.driver = pkgs.libfprint-2-tod1-vfs0090; # (Marked as broken as of 2025/04/23!) driver for 2016 ThinkPads
-  # services.fprintd.tod.driver = pkgs.libfprint-2-tod1-goodix-550a; # Goodix 550a driver (from Lenovo)
-
-  # however for focaltech 2808:a658, use fprintd with overidden package (without tod)
-  # services.fprintd.package = pkgs.fprintd.override {
-  #   libfprint = pkgs.libfprint-focaltech-2808-a658;
-  # };
-  # this package is deprecated as of 2026 due to copyright reasons, you may search the internet for archived caches
+  # Enables use of fingerprint reader for unlocking the user / system
+  services.fprintd.enable = true;
+  # Disables su, sudo, polkit auth, or login with fingerprint; allows unlocking of previous sessions however
+  # See the following Arch WiKi entry as to why: https://wiki.archlinux.org/title/Fprint
+  # These pam services live in `/etc/pam.d/`; might need to disable others as well as fprintd lives in other files
+  security.pam.services.login.fprintAuth = false;
+  security.pam.services.su.fprintAuth = false;
+  security.pam.services.sudo.fprintAuth = false;
+  security.pam.services.polkit-1.fprintAuth = false;
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

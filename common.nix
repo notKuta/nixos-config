@@ -11,9 +11,6 @@
 
   services.flatpak = {
     enable = true;
-    # W/ v.4.2.0 declarative-flatpak has changed behavior
-    # and this reverts it back to original behavior
-    runWithoutGui = true;
     remotes = {
       "flathub" = "https://dl.flathub.org/repo/flathub.flatpakrepo";
     };
@@ -44,6 +41,7 @@
   # Enable old login manager
   # services.displayManager.sddm.enable = true;
 
+  # Enable new login manager
   services.displayManager.plasma-login-manager.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
@@ -99,8 +97,6 @@
     ];*/
   };
 
-  
-
   ########################
   ###### NETWORKING ######
   ########################
@@ -116,44 +112,12 @@
   networking = {
     networkmanager.enable = true;
   };
-/*
 
-  ################################
-  Tailscale currently breaks DNS
-  if enabled. Have to troubleshoot
-  and fix at some point. The WiKi
-  would be a good place to start.`
-  ################################
-
-  # TAILSCALE NETWORKING STACK
-  # OPTIMIZATIONS MADE FOR MODERN NFTABLES INSTEAD OF LEGACY IPTABLES
-   # 1. Enable the service and the firewall
-  services.tailscale.enable = true;
-#  services.tailscale.useRoutingFeatures = "client";
-  networking.nftables.enable = true;
-  networking.firewall = {
-    enable = true;
-    # Always allow traffic from your Tailscale network
-    trustedInterfaces = [ config.services.tailscale.interfaceName ];
-    # Allow the Tailscale UDP port through the firewall
-    allowedUDPPorts = [ config.services.tailscale.port ];
-  };
-
-  # 2. Force tailscaled to use nftables (Critical for clean nftables-only systems)
-  # This avoids the "iptables-compat" translation layer issues.
-  systemd.services.tailscaled.serviceConfig.Environment = [ 
-    "TS_DEBUG_FIREWALL_MODE=nftables" 
-  ];
-
-  # 3. Optimization: Prevent systemd from waiting for network online 
-  # (Optional but recommended for faster boot with VPNs)
-  systemd.network.wait-online.enable = false; 
-  boot.initrd.systemd.network.wait-online.enable = false;
-
-  # 4. (USER-ADDED) Use Systemd-resolve or else DNS seemingly doesn't work...
+  # Enable Systemd-Resolved (reconmended for Tailscale usage)
   services.resolved.enable = true;
-  networking.useNetworkd = false;
-*/
+
+  # Tailscale settings are in `laptop-configuration`
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
