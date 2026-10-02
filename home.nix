@@ -197,6 +197,14 @@
       };
 
       powerdevil = {
+        general.pausePlayersOnSuspend = true;
+ 
+        batteryLevels = {
+          criticalLevel = 5;
+          lowLevel = 20;
+          criticalAction = "hibernate";
+        };
+
         AC = {
           autoSuspend.action = "sleep";
           autoSuspend.idleTimeout = 3600;
@@ -215,7 +223,7 @@
         };
 
         battery = {
-        # Hibernates after 10 minutes of inactivity on battery
+        # Sleeps after 10 minutes of inactivity on battery
           autoSuspend.action = "sleep";
           autoSuspend.idleTimeout = 600;
 
@@ -238,14 +246,10 @@
           whenSleepingEnter = "hybridSleep"; # Type: null or one of “hybridSleep”, “standby”, “standbyThenHibernate”
         };
 
-        batteryLevels.criticalLevel = 10;
-        batteryLevels.lowLevel = 20;
-        general.pausePlayersOnSuspend = true;
-
         lowBattery = {
           powerProfile = "powerSaving";
         # Hibernates after 5 mins of inactivity
-          autoSuspend.action = "hibernate";
+          autoSuspend.action = "sleep";
           autoSuspend.idleTimeout = 300;
 
           dimDisplay.enable = true;
@@ -258,8 +262,8 @@
           powerButtonAction = "shutDown";
           turnOffDisplay.idleTimeout = 300;
           turnOffDisplay.idleTimeoutWhenLocked = 60;
-          whenLaptopLidClosed = "hibernate";
-          whenSleepingEnter = "standbyThenHibernate";
+          whenLaptopLidClosed = "sleep";
+          whenSleepingEnter = "hybridSleep";
         };
       };
     };

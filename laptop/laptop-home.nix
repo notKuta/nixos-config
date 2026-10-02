@@ -8,4 +8,7 @@
 
   # Detail laptop-specific home-manager settings here
 
+  # Enables official systray applet for Tailscale
+  services.tailscale-systray.enable = true;
+
 }
