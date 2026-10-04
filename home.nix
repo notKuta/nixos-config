@@ -233,7 +233,7 @@
 
           dimKeyboard.enable = true;
           # keyboardBrightness = 20;
-          displayBrightness = 30;
+          # displayBrightness = 30;
 
           powerButtonAction = "shutDown";
           powerProfile = "powerSaving";
@@ -256,8 +256,8 @@
           dimDisplay.idleTimeout = 180;
 
           dimKeyboard.enable = true;
-          displayBrightness = 15;
-          keyboardBrightness = 20;
+          # displayBrightness = 15;
+          # keyboardBrightness = 20;
 
           powerButtonAction = "shutDown";
           turnOffDisplay.idleTimeout = 300;

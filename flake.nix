@@ -16,10 +16,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+
+    # Framework Laptop Hardware quirks
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware/master"; 
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     
   };
 
-  outputs = { self, nixpkgs, home-manager, flatpaks, plasma-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, flatpaks, plasma-manager, nixos-hardware, ... }@inputs: {
     # replace '.poseidon' with new hostname if needed
     nixosConfigurations.poseidon = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -57,6 +63,7 @@
           };
         } 
         flatpaks.nixosModules.default
+        nixos-hardware.nixosModules.framework-intel-core-ultra-series3
       ];
     };
   };
