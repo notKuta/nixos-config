@@ -211,14 +211,14 @@
           dimDisplay.enable = true;
           dimDisplay.idleTimeout = 2700; 
 
-          displayBrightness = 25;
+          # displayBrightness = 25;
           # keyboardBrightness = 50;
           powerButtonAction = "shutDown";
           powerProfile = "balanced";
           turnOffDisplay.idleTimeout = 3600;
           turnOffDisplay.idleTimeoutWhenLocked = 60;
 
-          whenLaptopLidClosed = "doNothing";
+          whenLaptopLidClosed = "sleep";
           whenSleepingEnter = "standby"; # Type: null or one of “hybridSleep”, “standby”, “standbyThenHibernate"
         };
 
