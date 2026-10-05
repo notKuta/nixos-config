@@ -207,6 +207,8 @@
      usbutils
      tree
      gimp
+     plasma-panel-colorizer
+     librepods
   #  wget
   ];
 
