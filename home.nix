@@ -310,6 +310,11 @@
 
     prismlauncher.enable = true;
 
+    discord = {
+      enable = true;
+      settings.SKIP_HOST_UPDATE = true;
+    };
+
     thunderbird = {
       enable = true;
       profiles."default_new" = {

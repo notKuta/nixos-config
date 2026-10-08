@@ -116,7 +116,7 @@
   # Enable Systemd-Resolved (reconmended for Tailscale usage)
   services.resolved.enable = true;
 
-  # Tailscale settings are in `laptop-configuration`
+  # /ailscale settings are in `laptop-configuration`
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -199,7 +199,6 @@
      sunshine
      haruna
      kdePackages.filelight
-     webcord
      pcsx2
      steam-rom-manager
      qbittorrent
