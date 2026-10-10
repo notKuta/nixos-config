@@ -94,7 +94,7 @@
         name = "PIXA3854:00 093A:1343 Touchpad";
         enable = true;
 	# Type: null or one of "default" or "none"
-        accelerationProfile = "default";
+        accelerationProfile = "none";
         scrollSpeed = 0.3;
         pointerSpeed = .21;
         naturalScroll = true;
