@@ -1,14 +1,6 @@
 { pkgs, config, inputs, ... }:
 
 {
-  # Sets garbage-collector to run every week
-  # and only delete generations older than 30 days
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than-30d";
-  };
-
   services.flatpak = {
     enable = true;
     remotes = {
@@ -159,11 +151,11 @@
       nativeMessagingHosts.packages = [ pkgs.firefoxpwa ];
       package = pkgs.firefox;
     };
+
     steam = {
       enable = true;
       # Fixes Xorg cursor issues
       extraPackages = with pkgs; [ kdePackages.breeze mangohud gamemode xivlauncher faugus-launcher ];
-
     };
 
     vim = {
@@ -184,6 +176,14 @@
 
     # Oepns the TCP & UDP ports 1714 to 1764 to make it work
     kdeconnect.enable = true;
+
+    nh = {
+      enable = true;
+      flake = "/home/kuta/nixos-config";
+      clean.enable = true;
+      clean.extraArgs = "--keep-since 4d --keep 3 --optimise";
+      clean.dates = "weekly";
+    };
 
   };
   
