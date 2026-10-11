@@ -396,6 +396,7 @@
     neovim = {
       enable = true;
       defaultEditor = true;
+      vimAlias = true;
       plugins = with pkgs.vimPlugins; 
       [
         # Helps with easy lsp configs for enabled &
