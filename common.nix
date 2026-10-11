@@ -161,6 +161,7 @@
     # Oepns the TCP & UDP ports 1714 to 1764 to make it work
     kdeconnect.enable = true;
 
+    # Disables mail, calender apps from KDE suite
     kde-pim.enable = false;
 
     nh = {
