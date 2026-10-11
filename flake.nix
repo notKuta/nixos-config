@@ -9,8 +9,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    flatpaks.url = "github:in-a-dil-emma/declarative-flatpak/latest";
+    #flatpaks.url = "github:in-a-dil-emma/declarative-flatpak/latest";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
+    # Inputs *might* be redudant here; need to study more of Nix to see
     plasma-manager = {
       url = "github:nix-community/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -18,6 +20,7 @@
     };
 
     # Framework Laptop Hardware quirks
+    # Input redudancy issue is true for here as well
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware/master"; 
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,7 +28,7 @@
     
   };
 
-  outputs = { self, nixpkgs, home-manager, flatpaks, plasma-manager, nixos-hardware, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, nix-flatpak, plasma-manager, nixos-hardware, ... }@inputs: {
     # replace '.poseidon' with new hostname if needed
     nixosConfigurations.poseidon = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -42,7 +45,7 @@
             users.kuta = ./desktop/desktop-home.nix; # replace <kuta> with new username if changed
           };
         } 
-        flatpaks.nixosModules.default
+        nix-flatpak.nixosModules.nix-flatpak
       ];
     };
 
@@ -62,7 +65,7 @@
             users.kuta = ./laptop/laptop-home.nix; # replace <kuta> with new username if changed
           };
         } 
-        flatpaks.nixosModules.default
+        nix-flatpak.nixosModules.nix-flatpak
         nixos-hardware.nixosModules.framework-intel-core-ultra-series3
       ];
     };

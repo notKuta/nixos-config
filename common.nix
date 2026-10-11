@@ -3,23 +3,7 @@
 {
   services.flatpak = {
     enable = true;
-    remotes = {
-      "flathub" = "https://dl.flathub.org/repo/flathub.flatpakrepo";
-    };
-    packages = [
-      "flathub:app/app.zen_browser.zen/x86_64/stable"
-    ];
-    overrides = {
-      "global".Context = {
-        filesystems = [
-          "home"
-        ];
-        sockets = [
-          "!x11"
-          "!fallback-x11"
-        ];
-      };
-    };
+    packages = [ "app.zen_browser.zen" ];
   };
 
   ########################
@@ -176,6 +160,8 @@
 
     # Oepns the TCP & UDP ports 1714 to 1764 to make it work
     kdeconnect.enable = true;
+
+    kde-pim.enable = false;
 
     nh = {
       enable = true;
