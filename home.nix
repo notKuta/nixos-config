@@ -65,6 +65,8 @@
     plasma = {
       enable = true;
 
+      # Enables full-declarative configuration; anything
+      # not set declaratively thru plasma-manager will be unset
       # overrideConfig = true;
 
       workspace = {
@@ -96,7 +98,7 @@
 	# Type: null or one of "default" or "none"
         accelerationProfile = "none";
         scrollSpeed = 0.3;
-        pointerSpeed = .21;
+        pointerSpeed = 0.21;
         naturalScroll = true;
         leftHanded = false;
         middleButtonEmulation = false;
