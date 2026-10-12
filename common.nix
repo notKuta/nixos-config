@@ -201,7 +201,7 @@
      gimp
      plasma-panel-colorizer
      librepods
-     # kdePackages.karousel
+     kdePackages.karousel
   #  wget
   ];
 

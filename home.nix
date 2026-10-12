@@ -77,7 +77,20 @@
         wallpaperFillMode = "preserveAspectCrop";
       };
 
+      # COMMENT OUT BELOW PANEL MODULE FOR GETTING FOUNDATION / BASE
+      # OF PANELS WHICH ARE USED
+      # This is done as the file in which these settings reside gets deleted
+      # fully during every login of Plasma which means we need a fully declarative
+      # setup which limits what widgets we can use. For the most part, the setup
+      # is mostly declarative---apart from a hibernate icon in the logout-lockout
+      # widget in the top panel and floating applets
+
+      # Or, apparently even uncommented its not forcing itself to be fully
+      # declaratively... weird since a GitHub issue explicitly says that it should
+      # be deleted. We will see if it changes, but good miracle??
+
       panels = [
+      /*
       {
         alignment = "center";
         extraSettings = null; # Extra shenangians with fillers and whatnot
@@ -87,6 +100,73 @@
         lengthMode = "fill";
         location = "bottom";
         opacity = "adaptive";
+      }
+      */
+
+      # Top panel
+      {
+        alignment = "center";
+        # floating = false;
+        height = 33;
+        lengthMode = "fill";
+        location = "top";
+        opacity = "opaque";
+        widgets = 
+        [
+         # In order to find the name of these widgets, run the `find` command
+         # under the Nix Store ie `find /nix/store -iname '*org.kde.plasma*' | grep ...`
+          {
+            name = "org.kde.plasma.pager";
+            config.General = {
+              displayedText = "none";
+              showWindowOutlines = false;
+            };
+          }
+          "org.kde.plasma.marginsseparator"
+          "org.kde.plasma.lock_logout"
+          "org.kde.plasma.panelspacer"
+          # Use a submodule format in order to configure the widget declaratively
+          # For exact settings / format, see plasma-manager github https://github.com/nix-community/plasma-manager/blob/trunk/modules/widgets/pager.nix
+          # and check under `modules/widgets` to see the supported configuration options and widgets
+          {
+            name = "org.kde.plasma.digitalclock";
+            config.Appearance = {
+              dateFormat = "custom";
+              dateDisplayFormat = "besideTime";
+            };
+          }
+          "org.kde.plasma.panelspacer"
+          "org.kde.plasma.systemtray"
+          "org.kde.plasma.marginsseparator"
+          "org.kde.plasma.minimizeall"
+        ];
+      }
+
+      # Bottom dock-panel
+      {
+        alignment = "center";
+        floating = false;
+        height = 52;
+        lengthMode = "fit";
+        location = "bottom";
+        opacity = "opaque";
+        hiding = "autohide";
+        widgets = 
+        [
+          "org.kde.plasma.kickoff"
+          {
+            # Format is from this GitHub issue: https://github.com/nix-community/plasma-manager/issues/498
+            name = "org.kde.plasma.icontasks";
+            # Application naming-scheme is derived from `~/.config/plasma-org.kde.plasma.desktop-appletsrc
+            # with the Header: [Containments][359][Applets][361][Configuration][General]
+            config.General.launchers = [
+              "applications:org.kde.dolphin.desktop"
+              "applications:app.zen_browser.zen.desktop"
+              "applications:FFPWA-01KYX600KE75YA53F0GN0M5FHG.desktop"
+              "applications:kitty.desktop"
+            ];
+          }
+        ];
       }
       
       ];
@@ -163,7 +243,6 @@
         general.styleStrategy.antialiasing = "prefer";
       };
 
-      
       # Sets the lockscreen wallpaper 
       kscreenlocker.appearance.wallpaper = "/home/kuta/nixos-config/wallpapers/metaphor-three-gang.jpg";
       kscreenlocker.appearance.showMediaControls = true;
@@ -172,6 +251,24 @@
       shortcuts = {
         kwin = {
           "Switch to Next Desktop" = "Meta+Tab";
+          # These two settings are unset as they conflict with karousel's defaults
+          # Default: Meta+D
+          "Show Desktop" = "none";
+          # Default: Meta+W
+          "Overview" = "Meta";
+          # Replaces `activate task manager entry` default keybind
+          "Switch to Desktop 1" = "Meta+1";
+          "Switch to Desktop 2" = "Meta+2";
+          "Switch to Desktop 3" = "Meta+3";
+          "Switch to Desktop 4" = "Meta+4";
+          "Switch to Desktop 5" = "Meta+5";
+          "Switch to Desktop 6" = "Meta+6";
+          "Switch to Desktop 7" = "Meta+7";
+          "Switch to Desktop 8" = "Meta+8";
+          "Switch to Desktop 9" = "Meta+9";
+          "Switch to Desktop 10" = "Meta+0";
+          # Toggles Window Fullscreen
+          "Window Fullscreen" = "Meta+F";
         };
         kmix = {
           mic_mute = [
@@ -179,6 +276,24 @@
             "Meta+Volume Mute"
             "Num+Del"
           ];
+        };
+        plasmashell = {
+          # Another setting that conflicts with karousel
+          # Default: Meta+A
+          "next activity" = [ "none" ];
+          # Default: Meta, Alt+1
+          "activate application launcher" = "none"; 
+          # Replaces `Switch to Desktop X` default keybinds
+          "activate task manager entry 1" = [ "Ctrl+F1" "Meta+F1" ];
+          "activate task manager entry 2" = [ "Ctrl+F2" "Meta+F2" ];
+          "activate task manager entry 3" = [ "Ctrl+F3" "Meta+F3" ];
+          "activate task manager entry 4" = [ "Ctrl+F4" "Meta+F4" ];
+          "activate task manager entry 5" = [ "Ctrl+F5" "Meta+F5" ];
+          "activate task manager entry 6" = [ "Ctrl+F6" "Meta+F6" ];
+          "activate task manager entry 7" = [ "Ctrl+F7" "Meta+F7" ];
+          "activate task manager entry 8" = [ "Ctrl+F8" "Meta+F8" ];
+          "activate task manager entry 9" = [ "Ctrl+F9" "Meta+F9" ];
+          "activate task manager entry 10" = [ "Ctrl+F10" "Meta+F10" ];
         };
       };
 
@@ -194,7 +309,7 @@
           shakeCursor.enable = true;
         };
 
-        virtualDesktops.number = 2;
+        virtualDesktops.number = 3;
         virtualDesktops.rows = 1;
       };
 
