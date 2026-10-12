@@ -331,7 +331,7 @@
 
           # displayBrightness = 25;
           # keyboardBrightness = 50;
-          powerButtonAction = "shutDown";
+          powerButtonAction = "hibernate";
           powerProfile = "balanced";
           turnOffDisplay.idleTimeout = 3600;
           turnOffDisplay.idleTimeoutWhenLocked = 60;
@@ -353,7 +353,7 @@
           # keyboardBrightness = 20;
           # displayBrightness = 30;
 
-          powerButtonAction = "shutDown";
+          powerButtonAction = "hibernate";
           powerProfile = "powerSaving";
 
           turnOffDisplay.idleTimeout = 600;
@@ -377,7 +377,7 @@
           # displayBrightness = 15;
           # keyboardBrightness = 20;
 
-          powerButtonAction = "shutDown";
+          powerButtonAction = "hibernate";
           turnOffDisplay.idleTimeout = 300;
           turnOffDisplay.idleTimeoutWhenLocked = 60;
           whenLaptopLidClosed = "sleep";
