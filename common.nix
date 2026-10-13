@@ -1,4 +1,4 @@
-{ pkgs, config, inputs, ... }:
+{ pkgs, config, inputs, lib, ... }:
 
 {
   services.flatpak = {
@@ -122,9 +122,6 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
   # Forces Firefox to run under Xwayland; fixes menus not
   # displaying correctly using FirefoxPWAs
   environment.sessionVariables.MOZ_ENABLE_WAYLAND = "0";
@@ -204,6 +201,24 @@
      kdePackages.karousel
   #  wget
   ];
+
+  # Conditionally allow the listed unfree packages to be installed
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "discord"
+      "discord-unwrapped"
+      "steam"
+      "steam-unwrapped"
+      # I believe `lsfg-vk` is packaged as a default extra package in Steam
+      # as I didn't explicitly download it
+      "lsfg-vk"
+      "nvidia-x11"
+      "nvidia-settings"
+    ];
+
+  # Allow *ALL* unfree packages
+  # nixpkgs.config.allowUnfree = true;
 
   ##############################
   ######### BOOTLOADER #########

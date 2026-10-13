@@ -445,9 +445,8 @@
       # Much more options available
     };
     
-    vscode = {
+    vscodium = {
       enable = true;
-      package = pkgs.vscode.fhs;
     };
 
     kitty = {

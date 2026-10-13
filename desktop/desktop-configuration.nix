@@ -42,10 +42,10 @@
   hardware.graphics.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia.open = true;
-  hardware.nvidia.modesetting.enable = true;
-  # Comment out to specify what package for nvidia drivers
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.beta;
-  hardware.nvidia.powerManagement.enable = true;
+  # hardware.nvidia.modesetting.enable = true;
+  # Specify what package for nvidia drivers
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.latest;
+  # hardware.nvidia.powerManagement.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
