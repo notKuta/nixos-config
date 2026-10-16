@@ -199,6 +199,7 @@
      plasma-panel-colorizer
      librepods
      kdePackages.karousel
+     melonds
   #  wget
   ];
 
