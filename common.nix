@@ -235,8 +235,8 @@
         efiSupport = pkgs.stdenv.hostPlatform.isEfi;
         extraConfig = "timeout: 1\n";
         style = {
-          wallpapers = [ /home/kuta/nixos-config/wallpapers/metaphor-will-official.jpg ];
-          wallpaperStyle = "centered";
+          wallpapers = [ ./wallpapers/metaphor-waterColor-background.jpg ];
+          wallpaperStyle = "stretched";
         };
 
         maxGenerations = 20;

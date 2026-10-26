@@ -19,6 +19,10 @@
     size = 16 * 1024; # 16 GiB
   }];
 
+  # Sets limine resolution to resolution of laptop screen
+  boot.loader.limine.resolution = "2880x1920";
+  boot.loader.limine.style.interface.resolution = "2880x1920";
+
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
