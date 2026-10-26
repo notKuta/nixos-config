@@ -145,7 +145,10 @@
           "org.kde.plasma.lock_logout"
           {
             name = "luisbocanegra.panel.colorizer";
-            config.General.isEnabled = true;
+            config.General = {
+              isEnabled = true;
+              hideWidget = true;
+            };
 
           }
         ];
