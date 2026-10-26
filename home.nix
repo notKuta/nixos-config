@@ -17,6 +17,10 @@
     "MangoHud/Stardew Valley.conf".source = config.lib.file.mkOutOfStoreSymlink "/home/kuta/nixos-config/configs/Stardew Valley.conf";
   };
 
+  home.file = {
+    ".face.icon".source = config.lib.file.mkOutOfStoreSymlink "/home/kuta/nixos-config/wallpapers/life1-noteGIMP.png";
+  };
+
   services = {
     pipewire = {
       enable = true;
