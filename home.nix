@@ -143,6 +143,11 @@
           "org.kde.plasma.marginsseparator"
           "org.kde.plasma.minimizeall"
           "org.kde.plasma.lock_logout"
+          {
+            name = "luisbocanegra.panel.colorizer";
+            config.General.isEnabled = true;
+
+          }
         ];
       }
 
