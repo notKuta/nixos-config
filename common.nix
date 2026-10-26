@@ -200,6 +200,8 @@
      librepods
      kdePackages.karousel
      melonds
+     libreoffice
+     kdePackages.dynamic-workspaces
   #  wget
   ];
 
@@ -226,20 +228,40 @@
   ##############################
 
   # Bootloader.
-  boot.loader.limine = {
-    enable = true;
-    efiSupport = pkgs.stdenv.hostPlatform.isEfi;
-    extraConfig = "timeout: 1\n";
-  };
-  
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    loader = {
+      limine = {
+        enable = true;
+        efiSupport = pkgs.stdenv.hostPlatform.isEfi;
+        extraConfig = "timeout: 1\n";
+      };
 
-  boot.zswap = {
-    enable = true; 
+      efi = {
+        canTouchEfiVariables = true;
+      };
+    };
+
+    zswap = {
+      enable = true; 
     # …
+    };
+
+    plymouth = {
+      enable = true;
+    };
+
+    # Enable "Silent boot"
+    consoleLogLevel = 3;
+    kernelParams = [
+      "quiet"
+      "rd.udev.log_level=3"
+      "rd.systemd.show_status=auto"
+    ];
+
   };
 
-  boot.initrd.systemd.enable = true;
+  # No longer has any effect; should be removed
+  # boot.initrd.systemd.enable = true;
 
   ##############################
   ########### FLAKES ###########

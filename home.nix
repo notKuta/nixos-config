@@ -123,7 +123,6 @@
             };
           }
           "org.kde.plasma.marginsseparator"
-          "org.kde.plasma.lock_logout"
           "org.kde.plasma.panelspacer"
           # Use a submodule format in order to configure the widget declaratively
           # For exact settings / format, see plasma-manager github https://github.com/nix-community/plasma-manager/blob/trunk/modules/widgets/pager.nix
@@ -139,6 +138,7 @@
           "org.kde.plasma.systemtray"
           "org.kde.plasma.marginsseparator"
           "org.kde.plasma.minimizeall"
+          "org.kde.plasma.lock_logout"
         ];
       }
 
@@ -310,7 +310,7 @@
           shakeCursor.enable = true;
         };
 
-        virtualDesktops.number = 3;
+        virtualDesktops.number = 2;
         virtualDesktops.rows = 1;
       };
 
