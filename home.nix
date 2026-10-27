@@ -65,7 +65,38 @@
     };
   };
 
+  # This holds my personal albeit minimal GNOME configuration
+  # I usually only use this when I am thinking of switching to GNOME
+  # but then always get cold-feet and run back to my faithful KDE :)
+  /*
+  dconf = {
+    enable = true;
+    settings = {
+      "org/gnome/desktop/interface".color-scheme = "prefer-dark";
+
+      "org/gnome/desktop/background".picture-uri = "file:///home/kuta/.local/share/backgrounds/2026-10-26-19-51-16-metaphor-three-gang.jpg";
+      "org/gnome/desktop/background".picture-uri-dark = "file:///home/kuta/.local/share/backgrounds/2026-10-26-19-51-16-metaphor-three-gang.jpg";
+
+      "org/gnome/desktop/background".primary-color = "#000000000000";
+      "org/gnome/desktop/background".secondary-color = "#000000000000";
+
+      "org/gnome/desktop/screensaver".picture-uri = "file:///home/kuta/.local/share/backgrounds/2026-10-26-19-51-16-metaphor-three-gang.jpg";
+
+      "org/gnome/desktop/screensaver".primary-color = "#000000000000";
+      "org/gnome/desktop/screensaver".secondary-color = "#000000000000";
+      
+      "org/gnome/desktop/interface".show-battery-percentage = true;
+    };
+  };
+  */
+
   programs = {
+  # Denotes my personal KDE configuration which is configured through
+  # Plasma-Manager; not all settings were able to be declared---namely 
+  # some panel configuration such as disabling shadows, making it all black,
+  # using Kara as a virtual desktop pager where the first two are done
+  # with Plasma-Panel-Colorizer
+  
     plasma = {
       enable = true;
 
@@ -94,18 +125,18 @@
       # be deleted. We will see if it changes, but good miracle??
 
       panels = [
-      /*
-      {
-        alignment = "center";
-        extraSettings = null; # Extra shenangians with fillers and whatnot
-        floating = true;
-        height = 46;
-        hiding = "autohide";
-        lengthMode = "fill";
-        location = "bottom";
-        opacity = "adaptive";
-      }
-      */
+      #
+      #{
+      #  alignment = "center";
+      #  extraSettings = null; # Extra shenangians with fillers and whatnot
+      #  floating = true;
+      #  height = 46;
+      #  hiding = "autohide";
+      #  lengthMode = "fill";
+      #  location = "bottom";
+      #  opacity = "adaptive";
+      #}
+      # 
 
       # Top panel
       {
@@ -117,8 +148,10 @@
         opacity = "opaque";
         widgets = 
         [
-         # In order to find the name of these widgets, run the `find` command
-         # under the Nix Store ie `find /nix/store -iname '*org.kde.plasma*' | grep ...`
+         # In order to find the name of these widgets, check the file
+         # residing at `~/.config/plasma-org.kde.plasma.desktop-appletsrc`
+         # where the needed name should be on a line of `plugin=foobar.foo.bar`
+         
           {
             name = "org.kde.plasma.pager";
             config.General = {
@@ -126,6 +159,12 @@
               showWindowOutlines = false;
             };
           }
+          
+          # Causes a bug as plasma-manager installs it seperately instead of
+          # using the package already installed onto the system. Kara needs to
+          # be patched to adequately work on NixOS right now so this widget does
+          # not work
+          #"org.dhruv8sh.kara"
           "org.kde.plasma.marginsseparator"
           "org.kde.plasma.panelspacer"
           # Use a submodule format in order to configure the widget declaratively
@@ -141,7 +180,7 @@
           "org.kde.plasma.panelspacer"
           "org.kde.plasma.systemtray"
           "org.kde.plasma.marginsseparator"
-          "org.kde.plasma.minimizeall"
+          #"org.kde.plasma.minimizeall"
           "org.kde.plasma.lock_logout"
           {
             name = "luisbocanegra.panel.colorizer";
@@ -312,7 +351,7 @@
 
       kwin = {
         effects = {
-          desktopSwitching.navigationWrapping = true;
+          desktopSwitching.navigationWrapping = false;
           hideCursor.hideOnInactivity = 60;
           desktopSwitching.animation = "slide";
           minimization.animation = "squash";
@@ -420,6 +459,7 @@
         };
       };
     };
+   
 
    git = {
       enable = true;
