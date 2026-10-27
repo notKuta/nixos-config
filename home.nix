@@ -509,6 +509,8 @@
         package = pkgs.fira-code;
       };
       settings = {
+        linux_display_server = "auto";
+
         foreground = "#dde1e6";
         background = "#161616";
         selection_foreground = "#f2f4f8";

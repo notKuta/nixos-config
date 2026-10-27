@@ -218,8 +218,9 @@ in
      libreoffice
      kdePackages.dynamic-workspaces
      kara-patched
-     gnome-tweaks
-     pkgs.gnomeExtensions.appindicator
+     yt-dlp
+  #  gnome-tweaks
+  #  gnomeExtensions.appindicator
   #  wget
   ];
   
