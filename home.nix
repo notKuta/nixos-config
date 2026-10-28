@@ -68,7 +68,7 @@
   # This holds my personal albeit minimal GNOME configuration
   # I usually only use this when I am thinking of switching to GNOME
   # but then always get cold-feet and run back to my faithful KDE :)
-  /*
+  
   dconf = {
     enable = true;
     settings = {
@@ -86,9 +86,11 @@
       "org/gnome/desktop/screensaver".secondary-color = "#000000000000";
       
       "org/gnome/desktop/interface".show-battery-percentage = true;
+
+      "org/gnome/shell".favorite-apps = ["org.gnome.Calendar.desktop" "org.gnome.Nautilus.desktop" "app.zen_browser.zen.desktop" "FFPWA-01KYX600KE75YA53F0GN0M5FHG.desktop" "thunderbird.desktop" "kitty.desktop"];
     };
   };
-  */
+  
 
   programs = {
   # Denotes my personal KDE configuration which is configured through
@@ -97,6 +99,7 @@
   # using Kara as a virtual desktop pager where the first two are done
   # with Plasma-Panel-Colorizer
   
+  /*
     plasma = {
       enable = true;
 
@@ -436,6 +439,7 @@
         };
       };
     };
+    */
 
     firefoxpwa = {
       enable = true;
@@ -509,7 +513,7 @@
         package = pkgs.fira-code;
       };
       settings = {
-        linux_display_server = "auto";
+        linux_display_server = "x11";
 
         foreground = "#dde1e6";
         background = "#161616";

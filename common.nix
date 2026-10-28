@@ -32,10 +32,10 @@ in
   # services.displayManager.sddm.enable = true;
 
   # Enable new login manager
-  services.displayManager.plasma-login-manager.enable = true;
+  ###services.displayManager.plasma-login-manager.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.desktopManager.plasma6.enable = true;
+  ###services.desktopManager.plasma6.enable = true;
 
   environment.plasma6.excludePackages = with pkgs.kdePackages; [
     plasma-browser-integration
@@ -44,10 +44,10 @@ in
   ];
 
   # Enable GNOME login manager
-  # services.displayManager.gdm.enable = true;
+  services.displayManager.gdm.enable = true;
 
   # Enable GNOME Desktop Environment
-  # services.desktopManager.gnome.enable = true;
+  services.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -219,8 +219,8 @@ in
      kdePackages.dynamic-workspaces
      kara-patched
      yt-dlp
-  #  gnome-tweaks
-  #  gnomeExtensions.appindicator
+     gnome-tweaks
+     gnomeExtensions.appindicator
   #  wget
   ];
   
