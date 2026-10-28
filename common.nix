@@ -44,10 +44,10 @@ in
   ];
 
   # Enable GNOME login manager
-  #services.displayManager.gdm.enable = true;
+  # services.displayManager.gdm.enable = true;
 
   # Enable GNOME Desktop Environment
-  #services.desktopManager.gnome.enable = true;
+  # services.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -219,9 +219,9 @@ in
      kdePackages.dynamic-workspaces
      kara-patched
      yt-dlp
-     gnome-tweaks
-     gnomeExtensions.appindicator
-  #  wget
+  #   gnome-tweaks
+  #   gnomeExtensions.appindicator
+  #   wget
   ];
   
   # Conditionally allow the listed unfree packages to be installed

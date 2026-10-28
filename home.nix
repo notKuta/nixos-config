@@ -88,6 +88,24 @@
       "org/gnome/desktop/interface".show-battery-percentage = true;
 
       "org/gnome/shell".favorite-apps = ["org.gnome.Calendar.desktop" "org.gnome.Nautilus.desktop" "app.zen_browser.zen.desktop" "FFPWA-01KYX600KE75YA53F0GN0M5FHG.desktop" "thunderbird.desktop" "kitty.desktop"];
+
+      "org/gnome/desktop/wm/keybindings".switch-to-workspace-1 = ["<Super>1"];
+      "org/gnome/shell/keybindings".switch-to-application-1 = "@as []";
+      "org/gnome/desktop/wm/keybindings".switch-to-workspace-2 = ["<Super>2"];
+      "org/gnome/shell/keybindings".switch-to-application-2 = "@as []";
+      "org/gnome/desktop/wm/keybindings".switch-to-workspace-3 = ["<Super>3"];
+      "org/gnome/shell/keybindings".switch-to-application-3 = "@as []";
+      "org/gnome/desktop/wm/keybindings".switch-to-workspace-4 = ["<Super>4"];
+      "org/gnome/shell/keybindings".switch-to-application-4 = "@as []";
+      "org/gnome/desktop/wm/keybindings".switch-to-workspace-5 = ["<Super>5"];
+      "org/gnome/desktop/wm/keybindings".switch-to-workspace-6 = ["<Super>6"];
+      "org/gnome/desktop/wm/keybindings".switch-to-workspace-7 = ["<Super>7"];
+      "org/gnome/desktop/wm/keybindings".switch-to-workspace-8 = ["<Super>8"];
+      "org/gnome/desktop/wm/keybindings".switch-to-workspace-9 = ["<Super>9"];
+      "org/gnome/desktop/wm/keybindings".switch-to-workspace-10 = ["<Super>10"];
+      "org/gnome/desktop/wm/keybindings".activate-window-menu = "@as []";
+      "org/gnome/settings-daemon/plugins/media-keys".search = "['<Alt>space']";
+
     };
   };
   
@@ -99,7 +117,6 @@
   # using Kara as a virtual desktop pager where the first two are done
   # with Plasma-Panel-Colorizer
   
-  /*
     plasma = {
       enable = true;
 
@@ -145,7 +162,7 @@
       {
         alignment = "center";
         # floating = false;
-        height = 33;
+        height = 30;
         lengthMode = "fill";
         location = "top";
         opacity = "opaque";
@@ -159,7 +176,7 @@
             name = "org.kde.plasma.pager";
             config.General = {
               displayedText = "none";
-              showWindowOutlines = false;
+              showWindowOutlines = true;
             };
           }
           
@@ -200,7 +217,7 @@
       {
         alignment = "center";
         floating = false;
-        height = 52;
+        height = 53;
         lengthMode = "fit";
         location = "bottom";
         opacity = "opaque";
@@ -439,7 +456,6 @@
         };
       };
     };
-    */
 
     firefoxpwa = {
       enable = true;
