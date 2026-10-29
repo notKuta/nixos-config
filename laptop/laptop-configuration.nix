@@ -12,21 +12,17 @@
       ../common.nix
     ];
 
-  networking.hostName = "neptune"; # Define your hostname.
-
-  swapDevices = [{
-    device = "/swapfile";
-    size = 16 * 1024; # 16 GiB
-  }];
-
-  # Sets limine resolution to resolution of laptop screen
-  boot.loader.limine.resolution = "2880x1920";
-  boot.loader.limine.style.interface.resolution = "2880x1920";
-
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
   # system.copySystemConfiguration = true;
+
+  #######################################################
+  ###################  NETWORKING  ######################
+  #######################################################
+
+  # Defines hostname for machine
+  networking.hostName = "neptune"; # Define your hostname.
 
   # TAILSCALE NETWORKING STACK
   # OPTIMIZATIONS MADE FOR MODERN NFTABLES INSTEAD OF LEGACY IPTABLES
@@ -53,15 +49,34 @@
   systemd.network.wait-online.enable = false; 
   boot.initrd.systemd.network.wait-online.enable = false;
 
+  ######################################################
+  ########### PAM / AUTHENTICATION SERVICES ############
+  ######################################################
+
   # Enables use of fingerprint reader for unlocking the user / system
   services.fprintd.enable = true;
-  # Disables su, sudo, polkit auth, or login with fingerprint; allows unlocking of previous sessions however
+
+  # Disables login with fingerprint; allows unlocking of previous sessions however
   # See the following Arch WiKi entry as to why: https://wiki.archlinux.org/title/Fprint
   # These pam services live in `/etc/pam.d/`; might need to disable others as well as fprintd lives in other files
   security.pam.services.login.fprintAuth = false;
-  security.pam.services.su.fprintAuth = false;
-  security.pam.services.sudo.fprintAuth = false;
-  security.pam.services.polkit-1.fprintAuth = false;
+
+  ######################################################
+  ################# BOOT / BOOTLOADER ##################
+  ######################################################
+
+  # Sets limine resolution to resolution of laptop screen
+  boot.loader.limine.resolution = "2880x1920";
+  boot.loader.limine.style.interface.resolution = "2880x1920";
+
+  ######################################################
+  ################### MISCELLANEOUS ####################
+  ######################################################
+
+  swapDevices = [{
+    device = "/swapfile";
+    size = 16 * 1024; # 16 GiB
+  }];
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

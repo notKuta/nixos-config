@@ -1,6 +1,11 @@
 { config, pkgs, inputs, lib, ... }:
 
 {
+
+  ##################################################################
+  ######################## MISCELLANEOUS ###########################
+  ##################################################################
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
@@ -11,6 +16,10 @@
   # changes in each release.
   home.stateVersion = "26.11";
 
+  ##################################################################
+  ###################### DOT/CONFIG FILES ##########################
+  ##################################################################
+
   # Symlinks configs from nixos-config directory to `.config/` 
   xdg.configFile = {
     "MangoHud/MangoHud.conf".source = config.lib.file.mkOutOfStoreSymlink "/home/kuta/nixos-config/configs/MangoHud.conf";
@@ -20,6 +29,10 @@
   home.file = {
     ".face.icon".source = config.lib.file.mkOutOfStoreSymlink "/home/kuta/nixos-config/wallpapers/life1-noteGIMP.png";
   };
+
+  ##################################################################
+  ################ AUDIO-NOISE SUPPRESSION PLUGIN ##################
+  ##################################################################
 
   services = {
     pipewire = {
@@ -64,6 +77,10 @@
       ];  
     };
   };
+
+  ##################################################################
+  ################# DESKTOP ENVIRONMENT SETTINGS ###################
+  ##################################################################
 
   # This holds my personal albeit minimal GNOME configuration
   # I usually only use this when I am thinking of switching to GNOME
@@ -125,24 +142,12 @@
       # overrideConfig = true;
 
       workspace = {
-      # Sets theme to Breeze Dark
+      # Sets theme to Breeze Dark and wallpaper
         lookAndFeel = "org.kde.breezedark.desktop";
         theme = "breeze-dark";
         wallpaper = "/home/kuta/nixos-config/wallpapers/metaphor-three-gang.jpg";
         wallpaperFillMode = "preserveAspectCrop";
       };
-
-      # COMMENT OUT BELOW PANEL MODULE FOR GETTING FOUNDATION / BASE
-      # OF PANELS WHICH ARE USED
-      # This is done as the file in which these settings reside gets deleted
-      # fully during every login of Plasma which means we need a fully declarative
-      # setup which limits what widgets we can use. For the most part, the setup
-      # is mostly declarative---apart from a hibernate icon in the logout-lockout
-      # widget in the top panel and floating applets
-
-      # Or, apparently even uncommented its not forcing itself to be fully
-      # declaratively... weird since a GitHub issue explicitly says that it should
-      # be deleted. We will see if it changes, but good miracle??
 
       panels = [
       #
@@ -457,6 +462,10 @@
       };
     };
 
+  ##################################################################
+  ########################### PROGRAMS #############################
+  ##################################################################
+
     firefoxpwa = {
       enable = true;
       package = pkgs.firefoxpwa.overrideAttrs (prev: {
@@ -716,8 +725,6 @@
           };
         }";
       in lib.mkMerge [ tabs rel_lines bufferline mini_pairs lsp lualine oxocarbon nvim_web_devicons noice];
-
-#     extraPython3Packages = pyPkgs: with pyPkgs; [ pylatexenc ];
 
     };
   };

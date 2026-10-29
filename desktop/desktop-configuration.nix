@@ -12,31 +12,31 @@
       ../common.nix
     ];
 
+  #######################################################
+  ###################  NETWORKING  ######################
+  #######################################################
+
   # Set hostname
   networking.hostName = "poseidon";
 
-  swapDevices = [{
-     device = "/swapfile";
-     size = 32 * 1024; # 32 GiB
-  }];
+  ######################################################
+  ################# BOOT / BOOTLOADER ##################
+  ######################################################
+
+  # Installs `zenpower` kernel driver and plugs the `k10temp` kernel
+  # module to read temperature & wattage (?) of AMD Ryzen cpus
+  boot.extraModulePackages = with config.boot.kernelPackages; [ zenergy ];
+  boot.kernelModules = { k10temp = true; ntsync = true; };
+
+  #####################################################
+  ##################### PROGRAMS ######################
+  #####################################################
 
   programs.coolercontrol.enable = true;
 
-  # Installs `zenpower` kernel driver and plugs the `k10temp` kernel
-  # module to read temperature & wattage (?) of AMD Ryzen cpus 
-  boot.extraModulePackages = with config.boot.kernelPackages; [ zenergy ];
-  boot.kernelModules = { k10temp = true; ntsync = true; };
-  
-  # Needed for hibernation with swapfile---in tandem with `resume.Device` being set
-  # May be device specific and is why I set the kernel params specifc to desktop
-  # `boot.resumeDevice` is in `common.nix`
-  # See the Arch wiki for more: https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Hibernation_into_swap_file
-  # boot.kernelParams = [ "resume_offset=61440" ];
-
-  # Sets the targeted resume device from waking from hibernation
-  # For swapfiles (which we use), you must also set the `physical_offset`
-  # kernel param for it to work. This is currently set in `desktop-config.nix`
-  # boot.resumeDevice = "/dev/disk/by-uuid/6a4d6992-9ebf-4bc4-b90a-a7bfcfb95561";
+  #####################################################
+  ################# GRAPHICS DRIVER ###################
+  #####################################################
   
    # Enable NVIDIA modules
   hardware.graphics.enable = true;
@@ -46,6 +46,15 @@
   # Specify what package for nvidia drivers
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.latest;
   # hardware.nvidia.powerManagement.enable = true;
+
+  #####################################################
+  ################## MISCELLANEOUS ####################
+  #####################################################
+
+  swapDevices = [{
+    device = "/swapfile";
+    size = 32 * 1024; # 32 GiB
+  }];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

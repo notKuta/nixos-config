@@ -242,9 +242,9 @@ in
   # Allow *ALL* unfree packages
   # nixpkgs.config.allowUnfree = true;
 
-  ##############################
-  ######### BOOTLOADER #########
-  ##############################
+  #####################################
+  ######### BOOT / BOOTLOADER #########
+  #####################################
 
   # Bootloader.
   boot = {
