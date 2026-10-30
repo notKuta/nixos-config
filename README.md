@@ -1,5 +1,10 @@
 # NixOS Configuration + "Install Guide"
 
+<!--toc:start-->
+- [NixOS Configuration + "Install Guide"](#nixos-configuration-install-guide)
+  - ["Install Guide"](#install-guide)
+<!--toc:end-->
+
 This repository stores my personal configuration for NixOS. Feel free
 to try it! To do so, simply clone the repo and copy its contents
 into `/etc/nixos`:
@@ -16,7 +21,7 @@ Then, simply rebuild the system with:
 
 ```bash
 sudo nixos-rebuild switch
-````
+```
 
 >[!caution]
 > Make sure to replace the `desktop-hardware-configuration.nix` file with your

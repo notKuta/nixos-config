@@ -471,6 +471,34 @@
   ########################### PROGRAMS #############################
   ##################################################################
 
+    kate = {
+      enable = true;
+      lsp.customServers = {
+        "nix" = {
+          "command" = ["nixd"];
+          "url" = "https://github.com/nix-community/nixd";
+          "highlightingModeRegex" = "^Nix$";
+        };
+      };
+      editor = {
+        brackets.automaticallyAddClosing = true;
+        #theme.src = ../configs/oxocarbon.colorscheme;
+      };
+    };
+
+    konsole = {
+      enable = true;
+      customColorSchemes = {
+        CustomTheme = ../configs/oxocarbon.colorscheme;
+      };
+      profiles."Main" = {
+        colorScheme = "CustomTheme";
+        font.name = "Fira Code";
+        font.size = 10;
+      };
+      defaultProfile = "Main";
+    };
+
     firefoxpwa = {
       enable = true;
       package = pkgs.firefoxpwa.overrideAttrs (prev: {
