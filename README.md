@@ -9,6 +9,9 @@ This repository stores my personal configuration for said OS.
 
 ## Overview / Structure
 
+Within this directory, there are various subdirectories with different
+purposes:
+
 ```console
 .
 ├── configs
@@ -19,9 +22,6 @@ This repository stores my personal configuration for said OS.
 ├── README.md
 └── wallpapers
 ```
-
-Within this directory, there are various subdirectories with different
-purposes:
 
 ### configs
 
