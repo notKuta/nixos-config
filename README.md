@@ -1,33 +1,48 @@
 # NixOS Configuration + "Install Guide"
 
-<!--toc:start-->
-- [NixOS Configuration + "Install Guide"](#nixos-configuration-install-guide)
-  - ["Install Guide"](#install-guide)
-<!--toc:end-->
+NixOS is a unique GNU/Linux distrobution which leverages the Nix package
+manager to enable its highly declarative design and atomic-based upgrades. For more
+information, one may refer to its [official website](https://nixos.org/) for a
+more proper introduction.
 
-This repository stores my personal configuration for NixOS. Feel free
-to try it! To do so, simply clone the repo and copy its contents
-into `/etc/nixos`:
+This repository stores my personal configuration for said OS.
 
-```bash
-git clone https://github.com/notKuta/nixos-config.git
+## Overview / Structure
 
-cd nixos-config
-
-cp * /etc/nixos
+```console
+.
+├── configs
+├── flake.lock
+├── flake.nix
+├── hosts
+├── misc
+├── README.md
+└── wallpapers
 ```
 
-Then, simply rebuild the system with:
+Within this directory, there are various subdirectories with different
+purposes:
 
-```bash
-sudo nixos-rebuild switch
-```
+### configs
 
->[!caution]
-> Make sure to replace the `desktop-hardware-configuration.nix` file with your
-> own---usually called `hardware-configuration.nix`. This is usually
-> where critical information, such as the file systems that need to be mounted, is stored
-> and is normally generated during installation. 
+This is the directory where various dotfiles or configuration files for
+various packages are stored. Usually, the home-manager utility will be used
+to facilitate the usage of these.
+
+### hosts
+
+General options and host-specific options are stored here. General options
+are imported to the host-specific files which are then imported by their
+respective hosts as a module within the `flake.nix`.
+
+### misc
+
+Where various miscellaneous files are stored that don't adhere to any of the
+other directories (and I don't want them to clog up the root of the directory).
+
+### wallpapers
+
+Self-explanatory. Any images used to customize the system will be stored here.
 
 ## "Install Guide"
 
