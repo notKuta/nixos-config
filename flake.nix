@@ -38,35 +38,37 @@
       };
     in
     {
-      # replace '.poseidon' with new hostname if needed for desktop
-      nixosConfigurations.poseidon = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = { inherit inputs; };
-        modules =
-        [
-          ./hosts/desktop/configuration.nix
-          home-manager.nixosModules.default
-          {
-            home-manager = (homeConfig ./hosts/desktop/home.nix);
-          }
-          nix-flatpak.nixosModules.nix-flatpak
-        ];
-      };
+      nixosConfigurations = {
 
-      # replace '.neptune' with new hostname if needed for laptop
-      nixosConfigurations.neptune = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = { inherit inputs; };
-        modules =
-        [
-          ./hosts/laptop/configuration.nix
-          home-manager.nixosModules.default
-          {
-            home-manager = (homeConfig ./hosts/laptop/home.nix);
-          }
-          nix-flatpak.nixosModules.nix-flatpak
-          nixos-hardware.nixosModules.framework-intel-core-ultra-series3
-        ];
-      };
-    };
+        # replace 'poseidon' with new hostname if needed for desktop
+        "poseidon" = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules =
+          [
+            ./hosts/desktop/configuration.nix
+            home-manager.nixosModules.default
+            {
+              home-manager = (homeConfig ./hosts/desktop/home.nix);
+            }
+            nix-flatpak.nixosModules.nix-flatpak
+          ];
+        };
+
+        # replace 'neptune' with new hostname if needed for laptop
+        "neptune" = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules =
+          [
+            ./hosts/laptop/configuration.nix
+            home-manager.nixosModules.default
+            {
+              home-manager = (homeConfig ./hosts/laptop/home.nix);
+            }
+            nix-flatpak.nixosModules.nix-flatpak
+            nixos-hardware.nixosModules.framework-intel-core-ultra-series3
+          ];
+        };
+    };};
 }
