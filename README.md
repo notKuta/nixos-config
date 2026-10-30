@@ -1,6 +1,6 @@
 # NixOS Configuration + "Install Guide"
 
-NixOS is a unique GNU/Linux distrobution which leverages the Nix package
+NixOS is a unique GNU/Linux distribution which leverages the Nix package
 manager to enable its highly declarative design and atomic-based upgrades. For more
 information, one may refer to its [official website](https://nixos.org/) for a
 more proper introduction.
