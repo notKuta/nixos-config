@@ -31,7 +31,7 @@ sudo nixos-rebuild switch
 
 ## "Install Guide"
 
-To see a "common sense" manual installation guide click [here.](https://github.com/notKuta/nixos-config/blob/experimental/install_guide.md)
+To see a "common sense" manual installation guide click [here.](https://github.com/notKuta/nixos-config/blob/496dea02908f54a52c722c010bddf84491aacb57/misc/install_guide.md)
 This is a quick write-up I wrote since I was tired of scouring
 through random webpages just to deploy a new system. These steps describe how to
 deploy a new system with:

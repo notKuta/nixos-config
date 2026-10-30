@@ -218,6 +218,7 @@
     kdePackages.dynamic-workspaces
     kara-patched
     yt-dlp
+    nerd-fonts.fira-code
   #   gnome-tweaks
   #   gnomeExtensions.appindicator
   #   wget

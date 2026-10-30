@@ -494,7 +494,7 @@
       };
       profiles."Main" = {
         colorScheme = "CustomTheme";
-        font.name = "Fira Code";
+        font.name = "FiraCode Nerd Font";
         font.size = 10;
       };
       defaultProfile = "Main";
