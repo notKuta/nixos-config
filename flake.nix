@@ -44,7 +44,7 @@
         specialArgs = { inherit inputs; };
         modules =
         [
-          ./host/desktop/configuration.nix
+          ./hosts/desktop/configuration.nix
           home-manager.nixosModules.default
           {
             home-manager = (homeConfig ./hosts/desktop/home.nix);
@@ -59,7 +59,7 @@
         specialArgs = { inherit inputs; };
         modules =
         [
-          ./host/laptop/configuration.nix
+          ./hosts/laptop/configuration.nix
           home-manager.nixosModules.default
           {
             home-manager = (homeConfig ./hosts/laptop/home.nix);

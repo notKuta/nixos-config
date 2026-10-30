@@ -19,10 +19,9 @@
   programs.coolercontrol.enable = true;
 
   environment.systemPackages = with pkgs;
-    [
-      btop-cuda
-    ]
-    ++ commonSytemPackages;
+  [
+    btop-cuda
+  ];
 
   #######################################################
   ###################  NETWORKING  ######################

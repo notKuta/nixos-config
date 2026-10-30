@@ -22,10 +22,9 @@
   #######################################################
 
   environment.systemPackages = with pkgs;
-    [
-      btop
-    ]
-    ++ commonSytemPackages;
+  [
+    btop
+  ];
 
   #######################################################
   ###################  NETWORKING  ######################
@@ -64,7 +63,7 @@
   ######################################################
 
   # Enables use of fingerprint reader for unlocking the user / system
-  services.fprintxd.enable = true;
+  services.fprintd.enable = true;
 
   # Disables login with fingerprint; allows unlocking of previous sessions however
   # See the following Arch WiKi entry as to why: https://wiki.archlinux.org/title/Fprint

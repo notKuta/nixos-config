@@ -173,7 +173,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
 
-  commonSytemPackages = let
+  environment.systemPackages = let
     # Structure of patched/override packages is taken from the following
     # reddit post:
     # https://www.reddit.com/r/NixOS/comments/128lgqu/how_to_correctly_override_something_in_a_nix/
@@ -186,7 +186,8 @@
         hash = "sha256-UZ3D4FtDuF4wT2EmnbioyHu19wVNYl0mQNZly5b4Mik=";
       };
     });
-  in with pkgs; [
+  in with pkgs;
+  [
     fastfetch
     tealdeer
     xivlauncher
@@ -217,7 +218,7 @@
   #   gnome-tweaks
   #   gnomeExtensions.appindicator
   #   wget
-  ];}
+  ];
   
   # Conditionally allow the listed unfree packages to be installed
   nixpkgs.config.allowUnfreePredicate =
@@ -249,7 +250,7 @@
         efiSupport = pkgs.stdenv.hostPlatform.isEfi;
         extraConfig = "timeout: 1\n";
         style = {
-          wallpapers = [ ./wallpapers/metaphor-waterColor-background.jpg ];
+          wallpapers = [ ../wallpapers/metaphor-waterColor-background.jpg ];
           wallpaperStyle = "stretched";
         };
 
