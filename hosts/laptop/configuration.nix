@@ -7,15 +7,25 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./laptop-hardware-configuration.nix
+      ./hardware-configuration.nix
       # Include common files
-      ../common.nix
+      ../configuration.nix
     ];
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
   # system.copySystemConfiguration = true;
+
+  #######################################################
+  ####################  PROGRAMS  #######################
+  #######################################################
+
+  environment.systemPackages = with pkgs;
+    [
+      btop
+    ]
+    ++ commonSytemPackages;
 
   #######################################################
   ###################  NETWORKING  ######################
@@ -54,7 +64,7 @@
   ######################################################
 
   # Enables use of fingerprint reader for unlocking the user / system
-  services.fprintd.enable = true;
+  services.fprintxd.enable = true;
 
   # Disables login with fingerprint; allows unlocking of previous sessions however
   # See the following Arch WiKi entry as to why: https://wiki.archlinux.org/title/Fprint

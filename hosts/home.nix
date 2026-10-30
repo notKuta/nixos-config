@@ -82,6 +82,8 @@
   ################# DESKTOP ENVIRONMENT SETTINGS ###################
   ##################################################################
 
+  ############################# GNOME ##############################
+
   # This holds my personal albeit minimal GNOME configuration
   # I usually only use this when I am thinking of switching to GNOME
   # but then always get cold-feet and run back to my faithful KDE :)
@@ -128,6 +130,9 @@
   
 
   programs = {
+
+  ############################# KDE ##############################
+
   # Denotes my personal KDE configuration which is configured through
   # Plasma-Manager; not all settings were able to be declared---namely 
   # some panel configuration such as disabling shadows, making it all black,

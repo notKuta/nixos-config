@@ -2,17 +2,15 @@
   description = "A flake to define the system (with unstable packages)";
 
   inputs = {
-   nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
-   home-manager = {
+    home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    #flatpaks.url = "github:in-a-dil-emma/declarative-flatpak/latest";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
-    # Inputs *might* be redudant here; need to study more of Nix to see
     plasma-manager = {
       url = "github:nix-community/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,7 +18,6 @@
     };
 
     # Framework Laptop Hardware quirks
-    # Input redudancy issue is true for here as well
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware/master"; 
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,46 +25,48 @@
     
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-flatpak, plasma-manager, nixos-hardware, ... }@inputs: {
-    # replace '.poseidon' with new hostname if needed
-    nixosConfigurations.poseidon = nixpkgs.lib.nixosSystem {
+  outputs = { self, nixpkgs, home-manager, nix-flatpak, plasma-manager, nixos-hardware, ... }@inputs:
+    let
       system = "x86_64-linux";
-      specialArgs = { inherit inputs; };
-      modules = [ ./desktop/desktop-configuration.nix 
-        home-manager.nixosModules.default
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            backupFileExtension = "bak";
-            extraSpecialArgs = { inherit inputs; };
-            sharedModules = [plasma-manager.homeModules.plasma-manager ];
-            users.kuta = ./desktop/desktop-home.nix; # replace <kuta> with new username if changed
-          };
-        } 
-        nix-flatpak.nixosModules.nix-flatpak
-      ];
-    };
+      homeConfig = homeConfigFile: {
+        useGlobalPkgs = true;
+        useUserPackages = true;
+        backupFileExtension = "bak";
+        extraSpecialArgs = { inherit inputs; };
+        sharedModules = [ plasma-manager.homeModules.plasma-manager ];
+        users.kuta = homeConfigFile; # replace <kuta> with new username if changed
+      };
+    in
+    {
+      # replace '.poseidon' with new hostname if needed for desktop
+      nixosConfigurations.poseidon = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = { inherit inputs; };
+        modules =
+        [
+          ./host/desktop/configuration.nix
+          home-manager.nixosModules.default
+          {
+            home-manager = (homeConfig ./hosts/desktop/home.nix);
+          }
+          nix-flatpak.nixosModules.nix-flatpak
+        ];
+      };
 
-    # replace '.neptune' with new hostname if needed
-    nixosConfigurations.neptune = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = { inherit inputs; };
-      modules = [ ./laptop/laptop-configuration.nix 
-        home-manager.nixosModules.default 
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            backupFileExtension = "bak";
-            extraSpecialArgs = { inherit inputs; };
-            sharedModules = [plasma-manager.homeModules.plasma-manager ];
-            users.kuta = ./laptop/laptop-home.nix; # replace <kuta> with new username if changed
-          };
-        } 
-        nix-flatpak.nixosModules.nix-flatpak
-        nixos-hardware.nixosModules.framework-intel-core-ultra-series3
-      ];
+      # replace '.neptune' with new hostname if needed for laptop
+      nixosConfigurations.neptune = nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = { inherit inputs; };
+        modules =
+        [
+          ./host/laptop/configuration.nix
+          home-manager.nixosModules.default
+          {
+            home-manager = (homeConfig ./hosts/laptop/home.nix);
+          }
+          nix-flatpak.nixosModules.nix-flatpak
+          nixos-hardware.nixosModules.framework-intel-core-ultra-series3
+        ];
+      };
     };
-  };
 }

@@ -7,10 +7,22 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./desktop-hardware-configuration.nix
+      ./hardware-configuration.nix
       # Includes the common, shared packages between systems
-      ../common.nix
+      ../configuration.nix
     ];
+
+  #####################################################
+  ##################### PROGRAMS ######################
+  #####################################################
+
+  programs.coolercontrol.enable = true;
+
+  environment.systemPackages = with pkgs;
+    [
+      btop-cuda
+    ]
+    ++ commonSytemPackages;
 
   #######################################################
   ###################  NETWORKING  ######################
@@ -27,12 +39,6 @@
   # module to read temperature & wattage (?) of AMD Ryzen cpus
   boot.extraModulePackages = with config.boot.kernelPackages; [ zenergy ];
   boot.kernelModules = { k10temp = true; ntsync = true; };
-
-  #####################################################
-  ##################### PROGRAMS ######################
-  #####################################################
-
-  programs.coolercontrol.enable = true;
 
   #####################################################
   ################# GRAPHICS DRIVER ###################

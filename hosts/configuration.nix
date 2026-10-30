@@ -1,19 +1,5 @@
 { pkgs, config, inputs, lib, ... }:
 
-# Structure of patched/override packages is taken from the following
-# reddit post: 
-# https://www.reddit.com/r/NixOS/comments/128lgqu/how_to_correctly_override_something_in_a_nix/
-let 
-  kara-patched = pkgs.kara.overrideAttrs (finalAttrs: prevAttrs: {
-    version = "64a843c";
-    src = pkgs.fetchFromGitHub {
-      owner = "dhruv8sh";
-      repo = "kara";
-      rev = "64a843c";
-      hash = "sha256-UZ3D4FtDuF4wT2EmnbioyHu19wVNYl0mQNZly5b4Mik=";
-    };
-  });
-in 
 {
   services.flatpak = {
     enable = true;
@@ -155,7 +141,7 @@ in
 
     vim = {
       enable = true;
-      defaultEditor = true;
+      # defaultEditor = true;
     }; 
 
     bash = { 
@@ -163,9 +149,6 @@ in
       enable = true;
       interactiveShellInit = "fastfetch";
     };
-
-    # Moved to desktop-specific config so framework laptop has seperate
-    # coolercontrol.enable = true;
 
     gamemode.enable = true;
 
@@ -189,40 +172,52 @@ in
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-    
-  environment.systemPackages = with pkgs; [
-     fastfetch
-     btop-cuda
-     tealdeer
-     xivlauncher
-     nixd
-     marksman
-     dust
-     protonplus
-     ungoogled-chromium
-     faugus-launcher
-     sunshine
-     haruna
-     kdePackages.filelight
-     pcsx2
-     steam-rom-manager
-     qbittorrent
-     audacity
-     usbutils
-     tree
-     gimp
-     plasma-panel-colorizer
-     librepods
-     kdePackages.karousel
-     melonds
-     libreoffice
-     kdePackages.dynamic-workspaces
-     kara-patched
-     yt-dlp
+
+  commonSytemPackages = let
+    # Structure of patched/override packages is taken from the following
+    # reddit post:
+    # https://www.reddit.com/r/NixOS/comments/128lgqu/how_to_correctly_override_something_in_a_nix/
+    kara-patched = pkgs.kara.overrideAttrs (finalAttrs: prevAttrs: {
+      version = "64a843c";
+      src = pkgs.fetchFromGitHub {
+        owner = "dhruv8sh";
+        repo = "kara";
+        rev = "64a843c";
+        hash = "sha256-UZ3D4FtDuF4wT2EmnbioyHu19wVNYl0mQNZly5b4Mik=";
+      };
+    });
+  in with pkgs; [
+    fastfetch
+    tealdeer
+    xivlauncher
+    nixd
+    marksman
+    dust
+    protonplus
+    ungoogled-chromium
+    faugus-launcher
+    sunshine
+    haruna
+    kdePackages.filelight
+    pcsx2
+    steam-rom-manager
+    qbittorrent
+    audacity
+    usbutils
+    tree
+    gimp
+    plasma-panel-colorizer
+    librepods
+    kdePackages.karousel
+    melonds
+    libreoffice
+    kdePackages.dynamic-workspaces
+    kara-patched
+    yt-dlp
   #   gnome-tweaks
   #   gnomeExtensions.appindicator
   #   wget
-  ];
+  ];}
   
   # Conditionally allow the listed unfree packages to be installed
   nixpkgs.config.allowUnfreePredicate =
