@@ -173,6 +173,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
 
+  # This option may be set in multiple different locations ie
+  # desktop/ & laptop/ as NixOS will merge all of them into
+  # one unified list
   environment.systemPackages = let
     # Structure of patched/override packages is taken from the following
     # reddit post:
@@ -278,6 +281,11 @@
       "rd.udev.log_level=3"
       "rd.systemd.show_status=auto"
     ];
+
+    # This option may be set in multiple different locations ie
+    # desktop/ & laptop/ as NixOS will merge all of them into
+    # one unified list
+    kernelModules = [ "ntsync" ];
 
   };
 

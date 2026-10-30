@@ -21,6 +21,9 @@
   ####################  PROGRAMS  #######################
   #######################################################
 
+  # This option may be set in multiple different locations ie
+  # desktop/ & laptop/ & hosts/ as NixOS will merge all of them into
+  # one unified list
   environment.systemPackages = with pkgs;
   [
     btop

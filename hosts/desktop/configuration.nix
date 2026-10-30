@@ -18,6 +18,9 @@
 
   programs.coolercontrol.enable = true;
 
+  # This option may be set in multiple different locations ie
+  # desktop/ & laptop/ & hosts/ as NixOS will merge all of them into
+  # one unified list
   environment.systemPackages = with pkgs;
   [
     btop-cuda
@@ -37,7 +40,10 @@
   # Installs `zenpower` kernel driver and plugs the `k10temp` kernel
   # module to read temperature & wattage (?) of AMD Ryzen cpus
   boot.extraModulePackages = with config.boot.kernelPackages; [ zenergy ];
-  boot.kernelModules = { k10temp = true; ntsync = true; };
+  # This option may be set in multiple different locations ie
+  # desktop/ & laptop/ & hosts/ as NixOS will merge all of them into
+  # one unified list
+  boot.kernelModules = [ "k10temp" ];
 
   #####################################################
   ################# GRAPHICS DRIVER ###################
