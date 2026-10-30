@@ -245,7 +245,8 @@
               "applications:app.zen_browser.zen.desktop"
               "applications:FFPWA-01KYX600KE75YA53F0GN0M5FHG.desktop"
               "applications:thunderbird.desktop"
-              "applications:kitty.desktop"
+              # "applications:kitty.desktop"
+              "applications:org.kde.konsole.desktop"
             ];
           }
         ];
