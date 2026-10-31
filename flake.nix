@@ -39,6 +39,7 @@
   outputs = { self, nixpkgs, home-manager, nix-flatpak, plasma-manager, nixos-hardware, aagl, ... }@inputs:
     let
       system = "x86_64-linux";
+      specialArgs = { inherit inputs; };
       homeConfig = homeConfigFile: {
         useGlobalPkgs = true;
         useUserPackages = true;
@@ -53,8 +54,7 @@
 
         # replace 'poseidon' with new hostname if needed for desktop
         "poseidon" = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
+          inherit system specialArgs;
           modules =
           [
             ./hosts/desktop/configuration.nix
@@ -69,8 +69,7 @@
 
         # replace 'neptune' with new hostname if needed for laptop
         "neptune" = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
+          inherit system specialArgs;
           modules =
           [
             ./hosts/laptop/configuration.nix
