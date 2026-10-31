@@ -226,6 +226,7 @@
     kara-patched
     yt-dlp
     nerd-fonts.fira-code
+    bitwarden-desktop
   #   gnome-tweaks
   #   gnomeExtensions.appindicator
   #   wget
