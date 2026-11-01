@@ -646,9 +646,9 @@
         mini-pairs
         # Creates the "tabs" look at the top of
         # nvim window
-        bufferline-nvim
+        ## bufferline-nvim
         # Creates the bottom statusline
-        lualine-nvim
+        ## lualine-nvim
 
         # Makes diagnostics 'prettier'
         # trouble-nvim
@@ -659,9 +659,9 @@
         # Be focused on and customized next
         which-key-nvim
         # UI Component Library
-        nui-nvim
+        ## nui-nvim
         # 'Prettier' cmdline 
-        noice-nvim
+        ## noice-nvim
 
         # Theme
         oxocarbon-nvim
@@ -675,10 +675,11 @@
         lsp = lib.mkOrder 500 "vim.lsp.enable('nixd')\nvim.lsp.enable('marksman')";
         mini_pairs = lib.mkOrder 500 "require ('mini.pairs').setup()";
 
-        bufferline = lib.mkOrder 500 "vim.opt.termguicolors = true\nrequire('bufferline').setup{}";
-        lualine = lib.mkOrder 500 "require('lualine').setup()";
+        ##bufferline = lib.mkOrder 500 "vim.opt.termguicolors = true\nrequire('bufferline').setup{}";
+        ##lualine = lib.mkOrder 500 "require('lualine').setup()";
         oxocarbon = lib.mkOrder 500 "vim.opt.background = 'dark'\nvim.cmd.colorscheme 'oxocarbon'";
 
+        /*
         noice = lib.mkOrder 500 "require('noice').setup({
           lsp = {
           -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -697,6 +698,7 @@
             lsp_doc_border = false, -- add a border to hover docs and signature help
           },
         })";
+        */
 
         nvim_web_devicons = "require'nvim-web-devicons'.setup {
           -- your personal icons can go here (to override)
@@ -758,7 +760,9 @@
             },
           };
         }";
-      in lib.mkMerge [ tabs rel_lines bufferline mini_pairs lsp lualine oxocarbon nvim_web_devicons noice];
+        # To add bufferline, lualine, noice simply write the previous into the list:
+        # ie `bufferline`, `lualine`, `noice`
+      in lib.mkMerge [ tabs rel_lines mini_pairs lsp oxocarbon nvim_web_devicons ];
 
     };
   };
