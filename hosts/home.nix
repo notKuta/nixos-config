@@ -529,7 +529,7 @@
       settings = {
         user = {
           name = "kuta";
-          email = "graystripe63@posteo.net";
+          email = "284247095+notKuta@users.noreply.github.com";
        };
         init.defaultBranch = "main";
       }; 
