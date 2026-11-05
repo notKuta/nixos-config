@@ -531,6 +531,7 @@
           name = "kuta";
           email = "284247095+notKuta@users.noreply.github.com";
        };
+        core.editor = "nvim";
         init.defaultBranch = "main";
       }; 
     };
