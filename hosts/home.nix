@@ -74,7 +74,17 @@
           }
           ]
       '')
-      ];  
+      ];
+
+      configs = {
+        "95-pipewire-rates" = {
+          "context.properties" = {
+            # "default.clock.rate" = 96000;
+            # Allowed rates are dervied from JDS Lab's Atom 2 DAC specs w/ TOSLINK optical out
+            "default.clock.allowed-rates" = [ 44100 48000 88200 96000 192000 ];
+          };
+        };
+      };
     };
   };
 
@@ -136,8 +146,7 @@
   # Denotes my personal KDE configuration which is configured through
   # Plasma-Manager; not all settings were able to be declared---namely 
   # some panel configuration such as disabling shadows, making it all black,
-  # using Kara as a virtual desktop pager where the first two are done
-  # with Plasma-Panel-Colorizer
+  # where the first two are done with Plasma-Panel-Colorizer
   
     plasma = {
       enable = true;

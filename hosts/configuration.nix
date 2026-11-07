@@ -386,4 +386,12 @@
 
   # Enable fwupd for firmware updates
   services.fwupd.enable = true;
+
+  services.udev.packages = lib.singleton (pkgs.writeTextFile
+    { name = "71-jds-labs-atom2-dac";
+      text = ''
+        ACTION!="remove", SUBSYSTEMS=="usb", ATTRS{idVendor}=="152a", ATTRS{idProduct}=="88e8", MODE="0660", TAG+="uaccess"
+        '';
+      destination = "/etc/udev/rules.d/71-jds-labs-atom2-dac.rules";
+    });
 }
