@@ -9,7 +9,7 @@ however, like ew---and my current headphones have a fairly high impedance---at l
 higher than anything you'd find on a regular set of earbuds or headphones. This usually
 would implicate overall volume issues but I found that my volume was "fine" for the most part
 and could be pushed sufficiently. Nevertheless, I caved to my over-optimization ridden brain 
-at bought my amplifier---its the JDS Labs Amp 2 for those keeping score at home. Few months
+and bought my amplifier---the JDS Labs Amp 2 for those keeping score at home. Few months
 would pass and I was really happy with the amp overall. So I thought: "Why not finish out
 the audio stack and get the DAC as well." Oh, how I was in for a rude awakening.
 
@@ -78,7 +78,7 @@ the rule name with a number less than 73. Well, shit. How the hell do we do that
 Thankfully, we can utilize NixOS AWESOME functions to come to the rescue as demonstrated in [this](https://github.com/NixOS/nixpkgs/issues/308681)
 GitHub issue. In short, the fix includes writing the following into your `configuration.nix` or similar file:
 
-```console
+```nix
 services.udev.packages = lib.singleton (pkgs.writeTextFile
       { name = "my-rules";
         text = ''

@@ -75,7 +75,7 @@
           ]
       '')
       ];
-
+/*
       configs = {
         "95-pipewire-rates" = {
           "context.properties" = {
@@ -85,6 +85,7 @@
           };
         };
       };
+*/
     };
   };
 
