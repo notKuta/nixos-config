@@ -6,15 +6,6 @@
   ######################## MISCELLANEOUS ###########################
   ##################################################################
 
-  # See the following GitHub README for why we import the module
-  # here and not in the flake (this is maybe another place to clean
-  # up the config if we can put it in flake):
-  # https://github.com/0xc000022070/zen-browser-flake
-  /*
-  imports = [
-    inputs.zen-browser.homeModules.beta
-  ];
-  */
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
@@ -261,7 +252,7 @@
             # with the Header: [Containments][359][Applets][361][Configuration][General]
             config.General.launchers = [
               "applications:org.kde.dolphin.desktop"
-              "applications:app.zen_browser.zen.desktop"
+              "applications:zen-beta.desktop"
               "applications:FFPWA-01KYX600KE75YA53F0GN0M5FHG.desktop"
               "applications:thunderbird.desktop"
               # "applications:kitty.desktop"
