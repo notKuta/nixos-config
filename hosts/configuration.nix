@@ -3,7 +3,7 @@
 {
   services.flatpak = {
     enable = true;
-    packages = [ "app.zen_browser.zen" ];
+    # packages = [ "app.zen_browser.zen" ];
   };
 
   ########################

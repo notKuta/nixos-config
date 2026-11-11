@@ -6,6 +6,15 @@
   ######################## MISCELLANEOUS ###########################
   ##################################################################
 
+  # See the following GitHub README for why we import the module
+  # here and not in the flake (this is maybe another place to clean
+  # up the config if we can put it in flake):
+  # https://github.com/0xc000022070/zen-browser-flake
+  /*
+  imports = [
+    inputs.zen-browser.homeModules.beta
+  ];
+  */
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
@@ -533,14 +542,18 @@
       };
     };
    
+    programs.zen-browser = {
+      enable = true;
+      setAsDefaultBrowser = true;
+    };
 
-   git = {
+    git = {
       enable = true;
       settings = {
         user = {
           name = "kuta";
           email = "284247095+notKuta@users.noreply.github.com";
-       };
+        };
         core.editor = "nvim";
         init.defaultBranch = "main";
       }; 
