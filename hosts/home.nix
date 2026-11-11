@@ -542,7 +542,7 @@
       };
     };
    
-    programs.zen-browser = {
+    zen-browser = {
       enable = true;
       setAsDefaultBrowser = true;
     };
