@@ -252,7 +252,7 @@
             # with the Header: [Containments][359][Applets][361][Configuration][General]
             config.General.launchers = [
               "applications:org.kde.dolphin.desktop"
-              "applications:zen-beta.desktop"
+              "applications:app.zen_browser.zen.desktop"
               "applications:FFPWA-01KYX600KE75YA53F0GN0M5FHG.desktop"
               "applications:thunderbird.desktop"
               # "applications:kitty.desktop"
