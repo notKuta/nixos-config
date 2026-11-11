@@ -33,21 +33,10 @@
       # aagl.url = "github:ezKEa/aagl-gtk-on-nix/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs"; # Name of nixpkgs input you want to use
     };
-
-    # A Firefox fork which prides itself on being beautifully designed,
-    # privacy-focused, and many great features
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake/beta";
-      inputs = {
-      # IMPORTANT: To ensure compatibility with the latest Firefox version, use nixpkgs-unstable.
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
-      };
-    };
     
   };
 
-  outputs = { self, nixpkgs, home-manager, nix-flatpak, plasma-manager, nixos-hardware, aagl, zen-browser, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nix-flatpak, plasma-manager, nixos-hardware, aagl, ... }@inputs:
     let
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
@@ -56,7 +45,7 @@
         useUserPackages = true;
         backupFileExtension = "bak";
         extraSpecialArgs = { inherit inputs; };
-        sharedModules = [ plasma-manager.homeModules.plasma-manager zen-browser.homeModules.beta ];
+        sharedModules = [ plasma-manager.homeModules.plasma-manager ];
         users.kuta = homeConfigFile; # replace <kuta> with new username if changed
       };
     in

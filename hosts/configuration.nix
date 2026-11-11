@@ -3,7 +3,7 @@
 {
   services.flatpak = {
     enable = true;
-    # packages = [ "app.zen_browser.zen" ];
+    packages = [ "app.zen_browser.zen" ];
   };
 
   ########################
@@ -227,6 +227,7 @@
     yt-dlp
     nerd-fonts.fira-code
     bitwarden-desktop
+    jellyfin-mpv-shim
   #   gnome-tweaks
   #   gnomeExtensions.appindicator
   #   wget

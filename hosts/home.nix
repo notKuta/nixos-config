@@ -533,11 +533,6 @@
       };
     };
    
-    zen-browser = {
-      enable = true;
-      setAsDefaultBrowser = true;
-    };
-
     git = {
       enable = true;
       settings = {
