@@ -248,11 +248,11 @@
           {
             # Format is from this GitHub issue: https://github.com/nix-community/plasma-manager/issues/498
             name = "org.kde.plasma.icontasks";
-            # Application naming-scheme is derived from `~/.config/plasma-org.kde.plasma.desktop-appletsrc
+            # Application naming-scheme is derived from `~/.config/plasma-org.kde.plasma.desktop-appletsrc`
             # with the Header: [Containments][359][Applets][361][Configuration][General]
             config.General.launchers = [
               "applications:org.kde.dolphin.desktop"
-              "applications:app.zen_browser.zen.desktop"
+              "applications:zen.desktop"
               "applications:FFPWA-01KYX600KE75YA53F0GN0M5FHG.desktop"
               "applications:thunderbird.desktop"
               # "applications:kitty.desktop"
