@@ -33,6 +33,12 @@
       # aagl.url = "github:ezKEa/aagl-gtk-on-nix/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs"; # Name of nixpkgs input you want to use
     };
+
+    # Firefox fork that promises a calmer, more focused Internet
+    zen-browser = {
+      url = "github:youwen5/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     
   };
 

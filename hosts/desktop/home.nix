@@ -10,6 +10,8 @@
 
   # Sets user environmental variables thru Systemd i.e. 
   # on other distros this would be thru ~/.config/environment.d
+  # This is set for the `USER` ***NOT*** globally. For global variables,
+  # see the option `environment.sessionVariables` within ~/nixos-config/hosts/configuration.nix
   # ONLY WORKS on KDE and GNOME (https://wiki.archlinux.org/title/Environment_variables#Per_Wayland_session)
   systemd.user.sessionVariables = { __GL_SHADER_DISK_CACHE_SIZE = 12000000000; MANGOHUD = 1; };
 }

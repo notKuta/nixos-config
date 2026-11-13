@@ -3,7 +3,7 @@
 {
   services.flatpak = {
     enable = true;
-    packages = [ "app.zen_browser.zen" ];
+    # packages = [ "app.zen_browser.zen" ];
   };
 
   ########################
@@ -122,9 +122,10 @@
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  # Forces Firefox to run under Xwayland; fixes menus not
-  # displaying correctly using FirefoxPWAs
-  environment.sessionVariables.MOZ_ENABLE_WAYLAND = "0";
+  # Forces Firefox to run under Wayland
+  # Allows touchpad backwards / forward swipe navigation to work
+  # "0" forces Xwayland; "1" forces Wayland
+  environment.sessionVariables.MOZ_ENABLE_WAYLAND = 1;
 
   programs = { 
     firefox = {
@@ -231,6 +232,9 @@
   #   gnome-tweaks
   #   gnomeExtensions.appindicator
   #   wget
+  ] ++
+  [
+    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
   
   # Conditionally allow the listed unfree packages to be installed
