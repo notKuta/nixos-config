@@ -30,6 +30,10 @@
     ".face.icon".source = config.lib.file.mkOutOfStoreSymlink "/home/kuta/nixos-config/wallpapers/life1-noteGIMP.png";
   };
 
+  # xdg.autostart.enable = true;
+  # Below is simply an example; created a unique `.desktop` under `desktop/home.nix`
+  # xdg.autostart.entries = [ "${pkgs.discord}/share/applications/discord.desktop" ];
+
   ##################################################################
   ################ AUDIO-NOISE SUPPRESSION PLUGIN ##################
   ##################################################################
