@@ -229,12 +229,17 @@
     nerd-fonts.fira-code
     bitwarden-desktop
     jellyfin-mpv-shim
+    arrpc
   #   gnome-tweaks
   #   gnomeExtensions.appindicator
   #   wget
   ] ++
   [
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+  ];
+
+  systemd.packages = with pkgs; [
+    arrpc
   ];
   
   # Conditionally allow the listed unfree packages to be installed
