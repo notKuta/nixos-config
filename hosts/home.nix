@@ -27,7 +27,7 @@
   };
 
   home.file = {
-    ".face.icon".source = config.lib.file.mkOutOfStoreSymlink "/home/kuta/nixos-config/wallpapers/life1-noteGIMP.png";
+    ".face.icon".source = config.lib.file.mkOutOfStoreSymlink "/home/kuta/nixos-config/wallpapers/geats-pfp.png";
   };
 
   # xdg.autostart.enable = true;
