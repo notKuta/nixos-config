@@ -9,9 +9,10 @@ on my system declaratively.
 
 - Emulation directory in `~/emulation`
 
-- News, Topic sections along with the `My Account` and `Service` links do not
-open to the default browser and do nothing. Should be talked in NixOS discourse
-first and then brough to upstream nixpkgs github
+- Apple Music PWA opens a different icon in the dock / bottom panel. Most
+likely a problem running it under Wayland since when running under X11
+I didn't notice any problems. To troubleshoot w/ logs run:
 
-- Apple Music PWA opens a different icon in the dock / bottom panel. Same steps to
-report as last point
+firefoxpwa site launch 01KYX600KE75YA53F0GN0M5FHG
+
+in a terminal.

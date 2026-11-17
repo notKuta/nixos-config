@@ -516,9 +516,15 @@
 
     firefoxpwa = {
       enable = true;
+      /*
       package = pkgs.firefoxpwa.overrideAttrs (prev: {
         libs = "${pkgs.firefox.libs}:${prev.libs}";
       });
+      */
+      settings = {
+        runtime_use_portals = true;
+        runtime_enable_wayland = false;
+      };
       profiles = {
         "01KYX600KEY64N6KDTG1T4MP1P" = {
           name = "Apple Music Profile";
