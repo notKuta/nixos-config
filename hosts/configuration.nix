@@ -6,9 +6,9 @@
     # packages = [ "app.zen_browser.zen" ];
   };
 
-  ########################
-  #### DISPLAY SERVER ####
-  ########################
+  ##################################
+  #### DISPLAY SERVER / PORTALS ####
+  ##################################
  
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
@@ -28,6 +28,19 @@
   #  konsole
     elisa
   ];
+
+  xdg.portal = {
+    # Enables `xdg desktop integration`; see here for more
+    # https://github.com/flatpak/xdg-desktop-portal
+    enable = true;
+    # Resolves bugs involving programs opening inside FHS envs or with
+    # unexpected env vars set from wrappers. Should fix XIVLauncher not
+    # opening browser when starting from Steam when XIVLauncher is an extraPackage.
+    # See these issue for more:
+    # https://github.com/NixOS/nixpkgs/issues/160923
+    # https://github.com/NixOS/nixpkgs/issues/237581
+    xdgOpenUsePortal = true;
+  };
 
   # Enable GNOME login manager
   # services.displayManager.gdm.enable = true;
